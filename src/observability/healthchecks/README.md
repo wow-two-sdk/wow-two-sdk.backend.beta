@@ -12,7 +12,7 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Observability.HealthChecks
 
 ```csharp
 builder.Services
-    .AddWowTwoHealthChecks()
+    .AddHealthChecksBuilder()
     .AddNpgSql(builder.Configuration.GetConnectionString("Db")!)
     .AddRedis(builder.Configuration.GetConnectionString("Redis")!)
     .AddRabbitMQ(builder.Configuration.GetConnectionString("Mq")!)

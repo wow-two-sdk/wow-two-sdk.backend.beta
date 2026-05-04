@@ -6,14 +6,14 @@ using OpenTelemetry.Trace;
 namespace WoW.Two.Sdk.Backend.Beta.Observability.Otlp;
 
 /// <summary>
-/// OTLP exporter registration. Pair with <c>AddWowTwoTracing</c> and <c>AddWowTwoMetrics</c>.
+/// OTLP exporter registration. Pair with <c>AddOpenTelemetryTracing</c> and <c>AddOpenTelemetryMetrics</c>.
 /// </summary>
 public static class OtlpServiceCollectionExtensions
 {
     /// <summary>
     /// Register OTLP exporter on traces, metrics, and logs. Endpoint defaults to env <c>OTEL_EXPORTER_OTLP_ENDPOINT</c> when not provided.
     /// </summary>
-    public static IServiceCollection AddWowTwoOtlpExporter(this IServiceCollection services, Uri? endpoint = null, OtlpExportProtocol protocol = OtlpExportProtocol.Grpc)
+    public static IServiceCollection AddOtlpExporters(this IServiceCollection services, Uri? endpoint = null, OtlpExportProtocol protocol = OtlpExportProtocol.Grpc)
     {
         ArgumentNullException.ThrowIfNull(services);
 

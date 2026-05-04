@@ -1,6 +1,6 @@
 # WoW.Two.Sdk.Backend.Beta.Testing.Verify
 
-> [Verify](https://github.com/VerifyTests/Verify) snapshot-testing defaults for the wow-two SDK.
+> [Verify](https://github.com/VerifyTests/Verify) snapshot-testing defaults for the Wow Two backend SDK.
 
 Brings:
 - `Verify.Xunit`
@@ -21,7 +21,7 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Testing.Verify
 internal static class TestSetup
 {
     [System.Runtime.CompilerServices.ModuleInitializer]
-    public static void Init() => WowVerifier.Initialize();
+    public static void Init() => VerifyDefaults.Initialize();
 }
 ```
 

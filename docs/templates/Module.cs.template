@@ -1,9 +1,10 @@
-// {ModuleName}Module.cs — registration extension(s) for the {AreaPath} package.
+// {ModuleName}ServiceCollectionExtensions.cs — registration extension(s) for the {AreaPath} package.
 //
 // Convention:
-//   - Public registration entry point: AddWowTwo{ModuleName}(this IServiceCollection)
-//   - Optional configurator: AddWowTwo{ModuleName}(this IServiceCollection, Action<{ModuleName}Options>)
-//   - Optional IConfiguration overload: AddWowTwo{ModuleName}(this IServiceCollection, IConfiguration, string sectionName = "{ModuleName}")
+//   - Method names describe what the registration concretely does.
+//     Replace `Add{Verb}{ModuleName}` below with a descriptive name like
+//     `AddJwtBearerAuthentication`, `AddPerIpSlidingWindowRateLimit`, `AddOpenTelemetryTracing`, etc.
+//   - Three overloads: () / (Action<TOptions>) / (IConfiguration, sectionName).
 //
 // Replace the {placeholders} when copying.
 
@@ -21,13 +22,13 @@ public static class {ModuleName}ServiceCollectionExtensions
     /// <summary>
     /// Registers {ModuleName} services with default options.
     /// </summary>
-    public static IServiceCollection AddWowTwo{ModuleName}(this IServiceCollection services)
-        => services.AddWowTwo{ModuleName}(static _ => { });
+    public static IServiceCollection Add{ModuleName}(this IServiceCollection services)
+        => services.Add{ModuleName}(static _ => { });
 
     /// <summary>
     /// Registers {ModuleName} services and binds <see cref="{ModuleName}Options"/> from the given configuration section.
     /// </summary>
-    public static IServiceCollection AddWowTwo{ModuleName}(
+    public static IServiceCollection Add{ModuleName}(
         this IServiceCollection services,
         IConfiguration configuration,
         string sectionName = "{ModuleName}")
@@ -43,7 +44,7 @@ public static class {ModuleName}ServiceCollectionExtensions
     /// <summary>
     /// Registers {ModuleName} services with an inline option configurator.
     /// </summary>
-    public static IServiceCollection AddWowTwo{ModuleName}(
+    public static IServiceCollection Add{ModuleName}(
         this IServiceCollection services,
         Action<{ModuleName}Options> configure)
     {

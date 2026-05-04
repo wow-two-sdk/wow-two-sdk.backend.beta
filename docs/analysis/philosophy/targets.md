@@ -342,7 +342,7 @@ The lib's own tests deferred (beta-forever rule), but we ship a **`*.testing` co
 
 | Item | Verdict | Note |
 |---|---|---|
-| WebApplicationFactory<T> wrapper (`WowTestHost<TProgram>`) | NEXT | Conventional integration-test scaffold |
+| WebApplicationFactory<T> wrapper (`WebApiTestHost<TProgram>`) | NEXT | Conventional integration-test scaffold |
 | Testcontainers fixtures (Postgres, Redis, RabbitMQ, Mongo, Kafka, Azurite) | NEXT | Pre-built fixtures |
 | Verify integrations (snapshot tests) | NEXT | `Verify.AspNetCore`, `.EntityFramework`, `.Http` |
 | FluentAssertions v7 (still free) | MAYBE | Or **AwesomeAssertions** (FluentAssertions OSS fork after license shift) |
@@ -654,7 +654,7 @@ Decoupled from UI lib's P1–P6. Reasoning:
 
 | Phase | Bundle | Scope (NOW + NEXT items) | Stop here if… |
 |---|---|---|---|
-| **P0 — testing scaffold (parallel track)** | `testing` companion package | `WowTestHost<T>` + Testcontainers fixtures (Postgres, Redis, RabbitMQ, Mongo, Kafka, Azurite) + Verify + AwesomeAssertions + Bogus + WireMock.Net | n/a — never stops; grows with every wrapper |
+| **P0 — testing scaffold (parallel track)** | `testing` companion package | `WebApiTestHost<T>` + Testcontainers fixtures (Postgres, Redis, RabbitMQ, Mongo, Kafka, Azurite) + Verify + AwesomeAssertions + Bogus + WireMock.Net | n/a — never stops; grows with every wrapper |
 | **P1 — boot floor** | foundation + `observability` + `web` (basics) | Hosting / DI conventions / Options + source-gen validation / Serilog→`ILogger<T>` seam / OTel SDK + auto-instrumentation / ProblemDetails (built-in + Hellang) / `Microsoft.AspNetCore.OpenApi` / Health checks (Xabaril core providers) / Rate limiting / Output cache (HybridCache memory mode) / Secure-headers middleware / `TimeProvider` + Cronos / Analyzer pack + `.editorconfig` | "Hello World API with logs/traces/health/openapi/rate-limit/problemdetails" — broadest applicability, lowest risk |
 | **P2 — request pipeline + auth** | `mediator` + `validation` + `errors` + `identity` | In-proc mediator (our facade, MediatR-API-compat) / FluentValidation pipeline behavior / `IExceptionHandler` global / **Identity API endpoints + JWT bearer + OIDC** / Vogen + Ardalis.GuardClauses / ErrorOr Result type / OneOf / Idempotency middleware | Stateless API (microservice doing HTTP + JWT + downstream calls) — no DB needed |
 | **P3 — persistence + outbound** | `data` + `caching` + `http` | EF Core (SqlServer/Npgsql/Pomelo/Sqlite) + audit interceptor + soft-delete filter / Dapper / EFCore.BulkExtensions / EFCore.NamingConventions / EFCore.Projectables / HybridCache + Redis L2 / Refit + `Microsoft.Extensions.Http.Resilience` / DbUp + EF Migrations runners | Single-instance API with persistence — no horizontal scale |
@@ -743,7 +743,7 @@ Things we deliberately won't build, with rationale.
 
 ## 10. Sequencing summary (TL;DR)
 
-**P0 (parallel track, ongoing)** — `testing` companion: `WowTestHost<T>` + Testcontainers fixtures + Verify + AwesomeAssertions + Bogus + WireMock.Net. Ships *with* P1 so every wrapper has runnable examples on day 1.
+**P0 (parallel track, ongoing)** — `testing` companion: `WebApiTestHost<T>` + Testcontainers fixtures + Verify + AwesomeAssertions + Bogus + WireMock.Net. Ships *with* P1 so every wrapper has runnable examples on day 1.
 
 **P1 (boot floor)** — broadest-applicability defaults: Hosting / DI / Options + validators / Serilog→ILogger seam / OTel auto-instrumentation / ProblemDetails / `Microsoft.AspNetCore.OpenApi` / Health checks / Rate limiting / Output cache / Secure headers / `TimeProvider` / Analyzer pack.
 

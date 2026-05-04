@@ -11,9 +11,9 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Observability.Otlp
 ## Usage
 
 ```csharp
-builder.Services.AddWowTwoTracing("my-service");
-builder.Services.AddWowTwoMetrics("my-service");
-builder.Services.AddWowTwoOtlpExporter(new Uri("http://collector:4317"));
+builder.Services.AddOpenTelemetryTracing("my-service");
+builder.Services.AddOpenTelemetryMetrics("my-service");
+builder.Services.AddOtlpExporters(new Uri("http://collector:4317"));
 ```
 
 Honors `OTEL_EXPORTER_OTLP_ENDPOINT` env var when no endpoint is passed.

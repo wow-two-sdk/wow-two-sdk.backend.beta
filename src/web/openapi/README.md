@@ -11,10 +11,10 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Web.OpenApi
 ## Usage
 
 ```csharp
-builder.Services.AddWowTwoOpenApi();
+builder.Services.AddOpenApiDefaults();
 
 var app = builder.Build();
-app.MapWowTwoOpenApi();   // -> /openapi/v1.json by default
+app.MapOpenApiEndpoint();   // -> /openapi/v1.json by default
 ```
 
 ## See also

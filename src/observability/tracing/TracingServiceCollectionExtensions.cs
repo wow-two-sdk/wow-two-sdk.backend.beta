@@ -14,7 +14,7 @@ public static class TracingServiceCollectionExtensions
     /// </summary>
     /// <param name="services">DI collection.</param>
     /// <param name="serviceName">Logical service name (used for the OTel resource).</param>
-    public static IServiceCollection AddWowTwoTracing(this IServiceCollection services, string serviceName)
+    public static IServiceCollection AddOpenTelemetryTracing(this IServiceCollection services, string serviceName)
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentException.ThrowIfNullOrWhiteSpace(serviceName);

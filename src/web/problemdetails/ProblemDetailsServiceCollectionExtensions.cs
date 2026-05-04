@@ -13,7 +13,7 @@ public static class ProblemDetailsServiceCollectionExtensions
     /// <summary>
     /// Register ProblemDetails with `traceId` enrichment.
     /// </summary>
-    public static IServiceCollection AddWowTwoProblemDetails(this IServiceCollection services)
+    public static IServiceCollection AddTraceAwareProblemDetails(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
 

@@ -10,7 +10,7 @@ public static class HealthChecksServiceCollectionExtensions
     /// <summary>
     /// Registers `IHealthChecksBuilder` with no checks attached. Add provider checks via the returned builder.
     /// </summary>
-    public static IHealthChecksBuilder AddWowTwoHealthChecks(this IServiceCollection services)
+    public static IHealthChecksBuilder AddHealthChecksBuilder(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
         return services.AddHealthChecks();

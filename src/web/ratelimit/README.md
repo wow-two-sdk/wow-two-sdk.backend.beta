@@ -11,7 +11,7 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Web.RateLimit
 ## Usage
 
 ```csharp
-builder.Services.AddWowTwoRateLimit();
+builder.Services.AddPerIpSlidingWindowRateLimit();
 
 var app = builder.Build();
 app.UseRateLimiter();

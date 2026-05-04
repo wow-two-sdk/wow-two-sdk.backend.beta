@@ -13,7 +13,7 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Time
 ### Registration
 
 ```csharp
-builder.Services.AddWowTwoTime();
+builder.Services.AddTimeProviders();
 ```
 
 ### Resolve a time zone (any id format)

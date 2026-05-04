@@ -9,10 +9,10 @@
 
 | Package | Niche | Status |
 |---|---|---|
-| `WoW.Two.Sdk.Backend.Beta.Testing` | Core test host (`WowTestHost<TProgram>`), `WowApiTest<TProgram>` xUnit base, async fixture interfaces | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Testing` | Core test host (`WebApiTestHost<TProgram>`), `WebApiTestBase<TProgram>` xUnit base, async fixture interfaces | shipped |
 | `WoW.Two.Sdk.Backend.Beta.Testing.Assertions` | Bundles AwesomeAssertions + Shouldly | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Testing.Bogus` | `WowFaker` deterministic-seed factory | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Testing.Verify` | `WowVerifier.Initialize()` + Verify.{Xunit, AspNetCore, Http} | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Testing.Bogus` | `BogusFakerFactory` deterministic-seed factory | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Testing.Verify` | `VerifyDefaults.Initialize()` + Verify.{Xunit, AspNetCore, Http} | shipped |
 | `WoW.Two.Sdk.Backend.Beta.Testing.WireMock` | `WireMockFixture` (WireMock.Net async fixture) | shipped |
 | `WoW.Two.Sdk.Backend.Beta.Testing.Containers` | `ContainerFixtureBase<TContainer>` for engine packages | shipped |
 | `WoW.Two.Sdk.Backend.Beta.Testing.Containers.Postgres` | `PostgresFixture` | shipped |
@@ -30,12 +30,12 @@
 
 | Package | Niche | Status |
 |---|---|---|
-| `WoW.Two.Sdk.Backend.Beta.Time` | `AddWowTwoTime`, `TimeZoneHelpers`, `CronExpressionParser`; NodaTime + Cronos + TimeZoneConverter | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Errors` | `WowError` record + category-to-HTTP-status mapping | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Time` | `AddTimeProviders`, `TimeZoneHelpers`, `CronExpressionParser`; NodaTime + Cronos + TimeZoneConverter | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Errors` | `DomainError` record + category-to-HTTP-status mapping | shipped |
 | `WoW.Two.Sdk.Backend.Beta.Results` | Re-exports ErrorOr + OneOf + Ardalis.Result | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Validation` | `AddWowTwoValidation` (FluentValidation assembly scan) | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Serialization` | `WowJsonOptions` (camelCase + NodaTime + lenient input) | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Guards` | `WowGuardExtensions` (`NotSlug`, `NotUlid`) on top of Ardalis.GuardClauses | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Validation` | `AddFluentValidatorsFromAssemblies` (FluentValidation assembly scan) | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Serialization` | `JsonOptionsPresets` (camelCase + NodaTime + lenient input) | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Guards` | `IdentifierGuardExtensions` (`NotSlug`, `NotUlid`) on top of Ardalis.GuardClauses | shipped |
 | `WoW.Two.Sdk.Backend.Beta.ValueObjects` | Re-exports Vogen + StronglyTypedId source generators | shipped |
 
 ### Observability
@@ -43,13 +43,13 @@
 | Package | Niche | Status |
 |---|---|---|
 | `WoW.Two.Sdk.Backend.Beta.Observability` | Meta — wires logging + tracing + metrics + health | planned |
-| `WoW.Two.Sdk.Backend.Beta.Observability.Logging` | `UseWowTwoLogging` — Serilog → `ILogger<T>` w/ Console + rolling File + enrichers | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Observability.Tracing` | `AddWowTwoTracing` — OTel tracer + AspNetCore/HttpClient/Grpc/SqlClient/EFCore/Redis instrumentation | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Observability.Metrics` | `AddWowTwoMetrics` — OTel meter + AspNetCore/HttpClient/Runtime/Process | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Observability.HealthChecks` | `AddWowTwoHealthChecks` — `IHealthChecksBuilder` + Xabaril provider deps (SqlServer/Postgres/MySql/Redis/RabbitMQ/Mongo/Kafka/Elastic/Network/Uris/AzureSB/AzureStorage/AwsS3/AwsSqs) | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Observability.Otlp` | `AddWowTwoOtlpExporter` — OTLP gRPC/HTTP for traces + metrics | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Observability.Prometheus` | `AddWowTwoPrometheusExporter` — scrape endpoint | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Observability.AzureMonitor` | `AddWowTwoAzureMonitorExporter` — Azure Monitor distro | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Observability.Logging` | `UseSerilogConventional` — Serilog → `ILogger<T>` w/ Console + rolling File + enrichers | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Observability.Tracing` | `AddOpenTelemetryTracing` — OTel tracer + AspNetCore/HttpClient/Grpc/SqlClient/EFCore/Redis instrumentation | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Observability.Metrics` | `AddOpenTelemetryMetrics` — OTel meter + AspNetCore/HttpClient/Runtime/Process | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Observability.HealthChecks` | `AddHealthChecksBuilder` — `IHealthChecksBuilder` + Xabaril provider deps (SqlServer/Postgres/MySql/Redis/RabbitMQ/Mongo/Kafka/Elastic/Network/Uris/AzureSB/AzureStorage/AwsS3/AwsSqs) | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Observability.Otlp` | `AddOtlpExporters` — OTLP gRPC/HTTP for traces + metrics | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Observability.Prometheus` | `AddPrometheusMetricsExporter` — scrape endpoint | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Observability.AzureMonitor` | `AddAzureMonitorExporter` — Azure Monitor distro | shipped |
 | `WoW.Two.Sdk.Backend.Beta.Observability.Datadog` | `Datadog.Trace` re-export (use OTLP route by default) | shipped |
 
 ### Web
@@ -57,38 +57,38 @@
 | Package | Niche | Status |
 |---|---|---|
 | `WoW.Two.Sdk.Backend.Beta.Web` | Meta — wires hosting + openapi + problem details + secure-headers + cors + ratelimit + outputcache | planned |
-| `WoW.Two.Sdk.Backend.Beta.Web.Hosting` | `AddWowTwoHosting` / `UseWowTwoHosting` — forwarded headers + request decompression | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Web.OpenApi` | `AddWowTwoOpenApi` / `MapWowTwoOpenApi` — `Microsoft.AspNetCore.OpenApi` (.NET 9) | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Web.Hosting` | `AddProxyAwareHosting` / `UseProxyAwareHosting` — forwarded headers + request decompression | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Web.OpenApi` | `AddOpenApiDefaults` / `MapOpenApiEndpoint` — `Microsoft.AspNetCore.OpenApi` (.NET 9) | shipped |
 | `WoW.Two.Sdk.Backend.Beta.Web.OpenApi.Swashbuckle` | Swashbuckle fallback adapter | planned |
-| `WoW.Two.Sdk.Backend.Beta.Web.ProblemDetails` | `AddWowTwoProblemDetails` — RFC 7807 + traceId/requestId enrichment | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Web.RateLimit` | `AddWowTwoRateLimit` — sliding window per-IP, 100 req/min default | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Web.OutputCache` | `AddWowTwoOutputCache` — built-in middleware with default 60s policy | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Web.SecureHeaders` | `UseWowTwoSecureHeaders` — OWASP-flavored preset (HSTS, CSP-friendly, COOP/COEP/CORP) | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Web.Cors` | `AddWowTwoCors` — single-line CORS policy registration | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Web.Compression` | `AddWowTwoCompression` — Brotli + Gzip with `Fastest` level | shipped |
-| `WoW.Two.Sdk.Backend.Beta.Web.Versioning` | `AddWowTwoVersioning` — URL/header/query versioning with `1.0` default | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Web.ProblemDetails` | `AddTraceAwareProblemDetails` — RFC 7807 + traceId/requestId enrichment | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Web.RateLimit` | `AddPerIpSlidingWindowRateLimit` — sliding window per-IP, 100 req/min default | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Web.OutputCache` | `AddDefaultOutputCache` — built-in middleware with default 60s policy | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Web.SecureHeaders` | `UseOwaspSecureHeaders` — OWASP-flavored preset (HSTS, CSP-friendly, COOP/COEP/CORP) | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Web.Cors` | `AddDefaultCorsPolicy` — single-line CORS policy registration | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Web.Compression` | `AddBrotliGzipCompression` — Brotli + Gzip with `Fastest` level | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Web.Versioning` | `AddDefaultApiVersioning` — URL/header/query versioning with `1.0` default | shipped |
 
 ## P2 — Request pipeline + auth
 
 | Package | Niche | Status |
 |---|---|---|
-| `WoW.Two.Sdk.Backend.Beta.Mediator` | In-process MediatR-API-compat mediator (our own) | planned |
-| `WoW.Two.Sdk.Backend.Beta.Mediator.Validation` | Pipeline behavior — FluentValidation | planned |
-| `WoW.Two.Sdk.Backend.Beta.Mediator.Logging` | Pipeline behavior — request/response logging | planned |
-| `WoW.Two.Sdk.Backend.Beta.Mediator.Authorization` | Pipeline behavior — authorize per request | planned |
-| `WoW.Two.Sdk.Backend.Beta.Mediator.Idempotency` | Pipeline behavior — idempotency key | planned |
+| `WoW.Two.Sdk.Backend.Beta.Mediator` | `IMediator` + `IRequest<T>` + `IPipelineBehavior<,>` — MediatR-API-compatible facade (no MediatR dep, MIT) | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Mediator.Validation` | `AddMediatorValidationBehavior()` — FluentValidation pipeline behavior | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Mediator.Logging` | `AddMediatorLoggingBehavior()` — source-gen `[LoggerMessage]` request/response logging | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Mediator.Authorization` | `AddMediatorAuthorizationBehavior()` + `IRequireAuthorization` marker | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Mediator.Idempotency` | `AddMediatorIdempotencyBehavior()` + `IIdempotent` + pluggable `IIdempotencyStore` | shipped |
 | `WoW.Two.Sdk.Backend.Beta.Identity` | Meta — JWT + cookies + Identity API endpoints | planned |
-| `WoW.Two.Sdk.Backend.Beta.Identity.Jwt` | JWT bearer wiring | planned |
-| `WoW.Two.Sdk.Backend.Beta.Identity.Cookies` | Cookie auth wiring | planned |
-| `WoW.Two.Sdk.Backend.Beta.Identity.Oidc` | OpenId Connect wiring | planned |
-| `WoW.Two.Sdk.Backend.Beta.Identity.OAuth.Google` | Google OAuth provider | planned |
-| `WoW.Two.Sdk.Backend.Beta.Identity.OAuth.Microsoft` | Microsoft Account / Entra ID provider | planned |
-| `WoW.Two.Sdk.Backend.Beta.Identity.OAuth.GitHub` | GitHub OAuth provider | planned |
-| `WoW.Two.Sdk.Backend.Beta.Identity.OAuth.Apple` | Apple Sign-In | planned |
-| `WoW.Two.Sdk.Backend.Beta.Identity.IdentityApi` | `MapIdentityApi<TUser>()` defaults | planned |
-| `WoW.Two.Sdk.Backend.Beta.Identity.Mfa.Totp` | TOTP via Otp.NET | planned |
-| `WoW.Two.Sdk.Backend.Beta.Identity.Mfa.WebAuthn` | FIDO2 / passkeys via Fido2NetLib | planned |
-| `WoW.Two.Sdk.Backend.Beta.Identity.PasswordHashing.Argon2` | Argon2 password hashing via Konscious | planned |
+| `WoW.Two.Sdk.Backend.Beta.Identity.Jwt` | `AddJwtBearerAuthentication()` — JWT bearer (symmetric or JWKS) | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Identity.Cookies` | `AddCookieAuthentication()` — secure cookie defaults | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Identity.Oidc` | `AddOpenIdConnectAuthentication()` — Authorization Code + PKCE | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Identity.OAuth.Google` | `AddGoogleAuthentication(clientId, clientSecret)` | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Identity.OAuth.Microsoft` | `AddMicrosoftAuthentication(clientId, clientSecret)` | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Identity.OAuth.GitHub` | `AddGitHubAuthentication(clientId, clientSecret, scopes)` | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Identity.OAuth.Apple` | `AddAppleAuthentication(clientId, teamId, keyId, keyPath)` | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Identity.IdentityApi` | `AddIdentityApiEndpoints<TContext>()` — bearer-token Identity endpoints with hardened defaults | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Identity.Mfa.Totp` | `TotpService` — secret gen + otpauth URI + verify with ±1 step tolerance | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Identity.Mfa.WebAuthn` | `AddFido2WebAuthn(domain, name, origins)` — Fido2.AspNet | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Identity.PasswordHashing.Argon2` | `UseArgon2PasswordHasher<TUser>()` — OWASP 2024 baseline | shipped |
 
 ## P3 — Persistence + outbound
 

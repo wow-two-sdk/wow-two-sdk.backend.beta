@@ -11,7 +11,7 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Web.Versioning
 ## Usage
 
 ```csharp
-builder.Services.AddWowTwoVersioning();
+builder.Services.AddDefaultApiVersioning();
 
 var versioned = app.NewVersionedApi();
 var v1 = versioned.MapGroup("/v{version:apiVersion}").HasApiVersion(new ApiVersion(1, 0));

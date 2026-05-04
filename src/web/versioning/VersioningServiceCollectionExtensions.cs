@@ -14,7 +14,7 @@ public static class VersioningServiceCollectionExtensions
     /// <summary>
     /// Register API versioning + ApiExplorer. Default version: `1.0`. Sources: URL segment (e.g. `/v1/...`), header `api-version`, query `api-version=1.0`.
     /// </summary>
-    public static IServiceCollection AddWowTwoVersioning(this IServiceCollection services)
+    public static IServiceCollection AddDefaultApiVersioning(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
 

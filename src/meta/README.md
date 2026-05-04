@@ -21,12 +21,14 @@ using WoW.Two.Sdk.Backend.Beta;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// One call wires the curated baseline.
-builder.AddWowTwoBackendBeta();
+// One call wires the curated baseline (foundation + observability + web + mediator + identity).
+builder.AddBackendBeta();
 
 var app = builder.Build();
 app.Run();
 ```
+
+> The meta-level `AddBackendBeta()` ships once the per-area defaults stabilize. Until then, compose the per-area extensions directly (see the root [README.md](../../README.md) Quick start).
 
 ## See also
 

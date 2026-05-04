@@ -11,9 +11,9 @@ namespace WoW.Two.Sdk.Backend.Beta.Web.Hosting;
 public static class HostingServiceCollectionExtensions
 {
     /// <summary>
-    /// Configure forwarded-headers + request decompression. Pair with <see cref="UseWowTwoHosting"/> in the pipeline.
+    /// Configure forwarded-headers + request decompression. Pair with <see cref="UseProxyAwareHosting"/> in the pipeline.
     /// </summary>
-    public static IServiceCollection AddWowTwoHosting(this IServiceCollection services)
+    public static IServiceCollection AddProxyAwareHosting(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
 
@@ -32,7 +32,7 @@ public static class HostingServiceCollectionExtensions
     /// Pipeline counterpart: invoke forwarded headers + request decompression.
     /// Call early in the pipeline.
     /// </summary>
-    public static IApplicationBuilder UseWowTwoHosting(this IApplicationBuilder app)
+    public static IApplicationBuilder UseProxyAwareHosting(this IApplicationBuilder app)
     {
         ArgumentNullException.ThrowIfNull(app);
         app.UseForwardedHeaders();

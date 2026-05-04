@@ -12,7 +12,7 @@ public static class MetricsServiceCollectionExtensions
     /// Registers OpenTelemetry metrics with auto-instrumentation for ASP.NET Core, HttpClient, runtime, and process.
     /// Exporters are NOT registered here — pair with `Observability.Otlp`, `.Prometheus`, etc.
     /// </summary>
-    public static IServiceCollection AddWowTwoMetrics(this IServiceCollection services, string serviceName)
+    public static IServiceCollection AddOpenTelemetryMetrics(this IServiceCollection services, string serviceName)
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentException.ThrowIfNullOrWhiteSpace(serviceName);

@@ -5,7 +5,7 @@ namespace WoW.Two.Sdk.Backend.Beta.Testing.Bogus;
 /// <summary>
 /// Conventional <see cref="global::Bogus.Faker{T}"/> wrappers with a deterministic seed for reproducible tests.
 /// </summary>
-public static class WowFaker
+public static class BogusFakerFactory
 {
     /// <summary>Default seed for Bogus randomization. Override per fixture if needed.</summary>
     public const int DefaultSeed = 1337;

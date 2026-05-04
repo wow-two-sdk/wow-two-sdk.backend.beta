@@ -1,6 +1,6 @@
 # WoW.Two.Sdk.Backend.Beta.Testing
 
-> Core test host (`WowTestHost<T>`), `WowApiTest<T>` xUnit base, and async fixture interfaces.
+> Core test host (`WebApiTestHost<T>`), `WebApiTestBase<T>` xUnit base, and async fixture interfaces.
 
 ## Install
 
@@ -10,12 +10,12 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Testing
 
 ## Usage
 
-### Inheriting `WowApiTest<TProgram>`
+### Inheriting `WebApiTestBase<TProgram>`
 
 ```csharp
 using WoW.Two.Sdk.Backend.Beta.Testing;
 
-public class GreetingsTests : WowApiTest<Program>
+public class GreetingsTests : WebApiTestBase<Program>
 {
     [Fact]
     public async Task Get_returns_hello()
@@ -36,7 +36,7 @@ public class GreetingsTests : WowApiTest<Program>
 ### Composing with container fixtures
 
 ```csharp
-public class PaymentTests : WowApiTest<Program>
+public class PaymentTests : WebApiTestBase<Program>
 {
     private readonly PostgresFixture _pg = new();
 
@@ -52,7 +52,7 @@ public class PaymentTests : WowApiTest<Program>
         await base.DisposeAsync();
     }
 
-    protected override WowTestHost<Program> BuildHost() => new()
+    protected override WebApiTestHost<Program> BuildHost() => new()
     {
         ConfigureServicesHook = services =>
         {

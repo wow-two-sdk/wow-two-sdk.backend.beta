@@ -11,7 +11,7 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Observability.AzureMonitor
 ## Usage
 
 ```csharp
-builder.Services.AddWowTwoAzureMonitorExporter();   // reads APPLICATIONINSIGHTS_CONNECTION_STRING
+builder.Services.AddAzureMonitorExporter();   // reads APPLICATIONINSIGHTS_CONNECTION_STRING
 // or pass explicitly
-builder.Services.AddWowTwoAzureMonitorExporter("InstrumentationKey=...");
+builder.Services.AddAzureMonitorExporter("InstrumentationKey=...");
 ```

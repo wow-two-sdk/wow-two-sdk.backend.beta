@@ -13,7 +13,7 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.{AreaPath}
 ```csharp
 using WoW.Two.Sdk.Backend.Beta.{AreaPath};
 
-builder.Services.AddWowTwo{ModuleName}();
+builder.Services.Add{ModuleName}();
 ```
 
 ## Spec

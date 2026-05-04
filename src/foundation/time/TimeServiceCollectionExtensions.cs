@@ -11,7 +11,7 @@ public static class TimeServiceCollectionExtensions
     /// <summary>
     /// Registers the system-default <see cref="TimeProvider"/> and a NodaTime <see cref="IClock"/>.
     /// </summary>
-    public static IServiceCollection AddWowTwoTime(this IServiceCollection services)
+    public static IServiceCollection AddTimeProviders(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
 
@@ -24,7 +24,7 @@ public static class TimeServiceCollectionExtensions
     /// <summary>
     /// Registers a specific <see cref="TimeProvider"/> instance — useful for tests passing <c>FakeTimeProvider</c>.
     /// </summary>
-    public static IServiceCollection AddWowTwoTime(this IServiceCollection services, TimeProvider timeProvider)
+    public static IServiceCollection AddTimeProviders(this IServiceCollection services, TimeProvider timeProvider)
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(timeProvider);

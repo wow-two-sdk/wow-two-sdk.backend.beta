@@ -17,8 +17,8 @@ The native tracer auto-instruments via the `dd-trace-dotnet` profiler when run i
 For most teams, prefer the OTLP route:
 
 ```csharp
-builder.Services.AddWowTwoTracing("my-service");
-builder.Services.AddWowTwoOtlpExporter(new Uri("http://localhost:4317"));   // dd-agent OTLP
+builder.Services.AddOpenTelemetryTracing("my-service");
+builder.Services.AddOtlpExporters(new Uri("http://localhost:4317"));   // dd-agent OTLP
 ```
 
 ## See also

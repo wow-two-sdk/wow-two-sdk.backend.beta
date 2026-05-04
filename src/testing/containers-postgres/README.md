@@ -18,7 +18,7 @@ public override async ValueTask InitializeAsync()
     await _pg.StartAsync();
 }
 
-protected override WowTestHost<Program> BuildHost() => new()
+protected override WebApiTestHost<Program> BuildHost() => new()
 {
     ConfigureServicesHook = s =>
         s.AddDbContext<MyDb>(o => o.UseNpgsql(_pg.ConnectionString))

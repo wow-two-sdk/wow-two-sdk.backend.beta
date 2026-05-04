@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Cookie authentication wiring with sane defaults — sliding expiration, HTTP-only, SameSite=Lax.</Description>
+    <PackageTags>wow-two; backend; beta; identity; cookies; auth</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+</Project>

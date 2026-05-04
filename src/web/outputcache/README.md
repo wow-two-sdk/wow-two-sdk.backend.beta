@@ -11,7 +11,7 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Web.OutputCache
 ## Usage
 
 ```csharp
-builder.Services.AddWowTwoOutputCache();
+builder.Services.AddDefaultOutputCache();
 
 var app = builder.Build();
 app.UseOutputCache();

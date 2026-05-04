@@ -8,12 +8,12 @@ namespace WoW.Two.Sdk.Backend.Beta.Web.OutputCache;
 public static class OutputCacheServiceCollectionExtensions
 {
     /// <summary>Default named policy: 60-second cache.</summary>
-    public const string DefaultPolicyName = "wow-two-default";
+    public const string DefaultPolicyName = "default";
 
     /// <summary>
     /// Register output caching with a default 60-second policy. Add policies via the returned builder.
     /// </summary>
-    public static IServiceCollection AddWowTwoOutputCache(this IServiceCollection services)
+    public static IServiceCollection AddDefaultOutputCache(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
 

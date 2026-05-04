@@ -20,7 +20,7 @@ public override async ValueTask InitializeAsync()
                 .RespondWith(Response.Create().WithBodyAsJson(new { id = 42, name = "Alice" }));
 }
 
-protected override WowTestHost<Program> BuildHost() => new()
+protected override WebApiTestHost<Program> BuildHost() => new()
 {
     ConfigureServicesHook = s =>
         s.AddHttpClient("UpstreamApi", c => c.BaseAddress = new Uri(_http.Url))

@@ -13,7 +13,7 @@ public static class LoggingHostExtensions
     /// Wire Serilog with sane defaults: console + rolling file in <c>logs/</c>, enriched with machine/process/thread context.
     /// Honors `Serilog:*` configuration if present (overrides programmatic defaults).
     /// </summary>
-    public static IHostBuilder UseWowTwoLogging(this IHostBuilder host)
+    public static IHostBuilder UseSerilogConventional(this IHostBuilder host)
     {
         ArgumentNullException.ThrowIfNull(host);
 

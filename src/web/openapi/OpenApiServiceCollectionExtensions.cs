@@ -10,9 +10,9 @@ namespace WoW.Two.Sdk.Backend.Beta.Web.OpenApi;
 public static class OpenApiServiceCollectionExtensions
 {
     /// <summary>
-    /// Register OpenAPI document generator. Pair with <see cref="MapWowTwoOpenApi"/> after build.
+    /// Register OpenAPI document generator. Pair with <see cref="MapOpenApiEndpoint"/> after build.
     /// </summary>
-    public static IServiceCollection AddWowTwoOpenApi(this IServiceCollection services)
+    public static IServiceCollection AddOpenApiDefaults(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
         services.AddOpenApi();
@@ -22,7 +22,7 @@ public static class OpenApiServiceCollectionExtensions
     /// <summary>
     /// Map the OpenAPI endpoint at `/openapi/{documentName}.json` (default).
     /// </summary>
-    public static IEndpointRouteBuilder MapWowTwoOpenApi(this IEndpointRouteBuilder endpoints)
+    public static IEndpointRouteBuilder MapOpenApiEndpoint(this IEndpointRouteBuilder endpoints)
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         endpoints.MapOpenApi();

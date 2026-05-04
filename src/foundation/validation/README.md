@@ -12,10 +12,10 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Validation
 
 ```csharp
 // Scan calling assembly for validators
-builder.Services.AddWowTwoValidation();
+builder.Services.AddFluentValidatorsFromAssemblies();
 
 // Or specify assemblies explicitly
-builder.Services.AddWowTwoValidation(typeof(Program).Assembly);
+builder.Services.AddFluentValidatorsFromAssemblies(typeof(Program).Assembly);
 ```
 
 Define validators normally:

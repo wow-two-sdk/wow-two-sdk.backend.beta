@@ -8,12 +8,12 @@ namespace WoW.Two.Sdk.Backend.Beta.Web.Cors;
 public static class CorsServiceCollectionExtensions
 {
     /// <summary>Default policy name.</summary>
-    public const string DefaultPolicyName = "wow-two-default";
+    public const string DefaultPolicyName = "default";
 
     /// <summary>
     /// Register a default CORS policy with the given allowed origins. No credentials by default.
     /// </summary>
-    public static IServiceCollection AddWowTwoCors(this IServiceCollection services, params string[] allowedOrigins)
+    public static IServiceCollection AddDefaultCorsPolicy(this IServiceCollection services, params string[] allowedOrigins)
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(allowedOrigins);

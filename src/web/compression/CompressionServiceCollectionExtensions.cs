@@ -12,7 +12,7 @@ public static class CompressionServiceCollectionExtensions
     /// <summary>
     /// Register response compression. Pair with `app.UseResponseCompression()`.
     /// </summary>
-    public static IServiceCollection AddWowTwoCompression(this IServiceCollection services)
+    public static IServiceCollection AddBrotliGzipCompression(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
 

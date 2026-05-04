@@ -41,40 +41,93 @@ namespace WoW.Two.Sdk.Backend.Beta.Time;
 ```csharp
 public static class TimeServiceCollectionExtensions
 {
-    public static IServiceCollection AddWowTwoTime(this IServiceCollection services, ...) { ... }
+    public static IServiceCollection AddTimeProviders(this IServiceCollection services, ...) { ... }
 }
 ```
 
-For non-`IServiceCollection` extensions, name `<Area><Target>Extensions`:
+For non-`IServiceCollection` extensions, name `<Target>Extensions` or `<Area><Target>Extensions`:
 
 - `TimeProviderExtensions` (extends `TimeProvider`)
-- `LoggerBuilderExtensions` (extends `ILoggingBuilder`)
+- `LoggingBuilderExtensions` (extends `ILoggingBuilder`)
 - `OpenTelemetryBuilderExtensions` (extends `IOpenTelemetryBuilder`)
 - `EndpointConventionBuilderExtensions` (extends `IEndpointConventionBuilder`)
 
 ## Registration method names
 
-Always **`AddWowTwo<Area>`**. The `WowTwo` infix avoids collisions with built-in `Add<Area>` and makes it grep-friendly.
+**No `WoWTwo` prefix on method names.** The package name (`WoW.Two.Sdk.Backend.Beta.<Area>`) carries the brand; method names describe what the registration concretely does.
+
+This mirrors the older `Backbone.Language.Features.Serialization` package convention where the method is `AddSystemTextJsonSerializer` — describing precisely what gets registered, not who built the wrapper.
+
+### Examples
 
 ```csharp
-services.AddWowTwoTime();
-services.AddWowTwoCaching();
-services.AddWowTwoCaching(opts => opts.RedisConnection = "localhost");
+// Foundation
+services.AddTimeProviders();
+services.AddFluentValidatorsFromAssemblies(typeof(Program).Assembly);
+
+// Observability
+host.UseSerilogConventional();
+services.AddOpenTelemetryTracing("my-service");
+services.AddOpenTelemetryMetrics("my-service");
+services.AddOtlpExporters(new Uri("http://collector:4317"));
+services.AddPrometheusMetricsExporter();
+services.AddAzureMonitorExporter();
+services.AddHealthChecksBuilder();
+
+// Web
+services.AddProxyAwareHosting();
+app.UseProxyAwareHosting();
+services.AddOpenApiDefaults();
+app.MapOpenApiEndpoint();
+services.AddTraceAwareProblemDetails();
+services.AddPerIpSlidingWindowRateLimit();
+services.AddDefaultOutputCache();
+app.UseOwaspSecureHeaders();
+services.AddDefaultCorsPolicy("https://example.com");
+services.AddBrotliGzipCompression();
+services.AddDefaultApiVersioning();
+
+// Mediator
+services.AddMediator(typeof(Program).Assembly);
+services.AddMediatorBehavior(typeof(LoggingBehavior<,>));
+services.AddMediatorValidationBehavior();
+services.AddMediatorLoggingBehavior();
+services.AddMediatorAuthorizationBehavior();
+services.AddMediatorIdempotencyBehavior();
+
+// Identity
+services.AddJwtBearerAuthentication(o => { ... });
+services.AddCookieAuthentication();
+services.AddOpenIdConnectAuthentication(o => { ... });
+services.AddIdentityApiEndpoints<AppDb>();
+authBuilder.AddGoogleAuthentication(clientId, clientSecret);
+authBuilder.AddMicrosoftAuthentication(clientId, clientSecret);
+authBuilder.AddGitHubAuthentication(clientId, clientSecret, scopes);
+authBuilder.AddAppleAuthentication(clientId, teamId, keyId, keyPath);
+services.AddFido2WebAuthn(domain, name, origins);
+services.UseArgon2PasswordHasher<IdentityUser>();
 ```
 
-For sub-areas:
+### Naming patterns
 
-```csharp
-services.AddWowTwoCachingRedis();
-services.AddWowTwoTestingContainersPostgres();
-```
+| Pattern | Example | When to use |
+|---|---|---|
+| `Add<Concrete>` | `AddJwtBearerAuthentication`, `AddOpenTelemetryTracing` | Scheme/system-specific registration |
+| `Add<Default><Thing>` | `AddDefaultCorsPolicy`, `AddDefaultOutputCache` | Pre-set policy/configuration |
+| `Add<Specific><Thing>` | `AddPerIpSlidingWindowRateLimit`, `AddBrotliGzipCompression` | Picks one strategy among many |
+| `Use<Concrete>` | `UseOwaspSecureHeaders`, `UseSerilogConventional` | Pipeline middleware |
+| `Map<Endpoint>` | `MapOpenApiEndpoint` | Endpoint routing |
+| `Add<Lib>FromAssemblies` | `AddFluentValidatorsFromAssemblies` | Assembly-scanning registration |
 
-For `WebApplicationBuilder`-friendly registration that wires both services and middleware patterns at once:
+**Rule of thumb**: a developer who has never heard of wow-two should be able to read the method name and immediately know what it does. If you'd want to add a comment like `// these are wow-two's defaults`, the method name is wrong — bake the meaning in.
 
-```csharp
-builder.AddWowTwoBackendBeta();   // meta — does everything
-builder.AddWowTwoWeb();           // P1 web bundle
-```
+### Stable identifiers (cookie names, policy names)
+
+Constants that need to be unique system-wide may keep a stable identifier shape (e.g. cookie name `.app.auth`, policy name `"default"`). Don't bake `wow-two` into them — they're consumer-visible and may collide with consumer-defined names.
+
+### `ActivitySource` / `Meter` names
+
+Internal diagnostics types use `WoW.Two.<Area>` — these are intentional brand prefixes so trace/metric filtering works at scale across services. **Different from public method names.**
 
 ## Options types
 

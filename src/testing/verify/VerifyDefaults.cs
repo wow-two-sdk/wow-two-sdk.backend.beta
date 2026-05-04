@@ -4,7 +4,7 @@ using VerifyTests;
 namespace WoW.Two.Sdk.Backend.Beta.Testing.Verify;
 
 /// <summary>
-/// Conventional Verify defaults applied for the wow-two backend SDK:
+/// Conventional Verify defaults applied for the Wow Two backend SDK:
 /// <list type="bullet">
 ///   <item>Sub-folder per test class (`UseDirectory("Snapshots")`).</item>
 ///   <item>Counter-name suffix for stable ordering.</item>
@@ -14,10 +14,10 @@ namespace WoW.Two.Sdk.Backend.Beta.Testing.Verify;
 /// Wire by adding to a `ModuleInitializer` in the consumer test project:
 /// <code>
 /// [ModuleInitializer]
-/// public static void Init() => WowVerifier.Initialize();
+/// public static void Init() => VerifyDefaults.Initialize();
 /// </code>
 /// </summary>
-public static class WowVerifier
+public static class VerifyDefaults
 {
     private static int _initialized;
 

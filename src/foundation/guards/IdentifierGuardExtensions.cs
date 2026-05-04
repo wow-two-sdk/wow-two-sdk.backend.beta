@@ -6,7 +6,7 @@ namespace WoW.Two.Sdk.Backend.Beta.Guards;
 /// <summary>
 /// Custom guard extensions on top of <see cref="IGuardClause"/>.
 /// </summary>
-public static partial class WowGuardExtensions
+public static partial class IdentifierGuardExtensions
 {
     [GeneratedRegex(@"^[a-z0-9]+(-[a-z0-9]+)*$", RegexOptions.CultureInvariant)]
     private static partial Regex SlugRegex();

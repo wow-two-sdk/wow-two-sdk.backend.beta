@@ -15,7 +15,7 @@ namespace WoW.Two.Sdk.Backend.Beta.Testing;
 /// </list>
 /// </summary>
 /// <typeparam name="TEntryPoint">The application entry-point type (typically <c>Program</c>).</typeparam>
-public class WowTestHost<TEntryPoint> : WebApplicationFactory<TEntryPoint>
+public class WebApiTestHost<TEntryPoint> : WebApplicationFactory<TEntryPoint>
     where TEntryPoint : class
 {
     /// <summary>

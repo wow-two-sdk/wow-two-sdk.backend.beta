@@ -14,8 +14,8 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Observability.AzureMonitor
 ## Usage
 
 ```csharp
-builder.Services.AddWowTwoTracing("my-service");
-builder.Services.AddWowTwoOtlpExporter("https://collector:4317");
+builder.Services.AddOpenTelemetryTracing("my-service");
+builder.Services.AddOtlpExporters("https://collector:4317");
 ```
 
 Auto-instrumented sources: ASP.NET Core · HttpClient · gRPC client · SqlClient · EF Core · StackExchange.Redis.

@@ -13,7 +13,7 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Testing.Containers.Redis
 ```csharp
 private readonly RedisFixture _redis = new();
 
-protected override WowTestHost<Program> BuildHost() => new()
+protected override WebApiTestHost<Program> BuildHost() => new()
 {
     ConfigureServicesHook = s =>
         s.AddStackExchangeRedisCache(o => o.Configuration = _redis.ConnectionString)

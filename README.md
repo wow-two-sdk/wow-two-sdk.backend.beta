@@ -1,6 +1,6 @@
 # wow-two-sdk.backend.beta
 
-> Beta-forever .NET 9 backend SDK — wraps the .NET ecosystem behind opinionated `AddWowTwo*` registrations so a `Program.cs` becomes 1–2 liners instead of 100.
+> Beta-forever .NET 9 backend SDK — wraps the .NET ecosystem behind opinionated, descriptively-named registration extensions (`AddJwtBearerAuthentication`, `AddOpenTelemetryTracing`, `AddPerIpSlidingWindowRateLimit`, …) so a `Program.cs` becomes 1–2 liners per concern instead of 100.
 
 ## Status
 
@@ -10,20 +10,64 @@
 | P1 — foundation | `time`, `errors`, `results`, `validation`, `serialization`, `guards`, `value-objects` | ✅ 7 packages shipped |
 | P1 — observability | `logging`, `tracing`, `metrics`, `healthchecks`, `otlp`, `prometheus`, `azure-monitor`, `datadog` | ✅ 8 packages shipped |
 | P1 — web | `hosting`, `openapi`, `problemdetails`, `ratelimit`, `outputcache`, `secureheaders`, `cors`, `compression`, `versioning` | ✅ 9 packages shipped |
-| P2 | request pipeline + auth | planned |
+| P2 — mediator | `mediator`, `mediator.{validation, logging, authorization, idempotency}` | ✅ 5 packages shipped |
+| P2 — identity | `identity.{jwt, cookies, oidc, identity-api}`, `oauth.{google, microsoft, github, apple}`, `mfa.{totp, webauthn}`, `password-hashing.argon2` | ✅ 11 packages shipped |
 | P3 | persistence + outbound | planned |
 | P4 | distributed essentials | planned |
 | P5 | SaaS-shaped (tenancy + AI + flags) | planned |
 | P6 | heavy domain extensions | planned |
 
-**36 packages shipped**, 150+ planned. See [`docs/conventions/package-registry.md`](./docs/conventions/package-registry.md).
+**52 packages shipped**, 130+ planned. See [`docs/conventions/package-registry.md`](./docs/conventions/package-registry.md).
 
-## Quick start (once P1 ships)
+## Quick start
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
-builder.AddWowTwoBackendBeta();   // one call wires the curated baseline
+
+// Foundation
+builder.Host.UseSerilogConventional();
+builder.Services
+    .AddTimeProviders()
+    .AddFluentValidatorsFromAssemblies(typeof(Program).Assembly);
+
+// Observability
+builder.Services
+    .AddOpenTelemetryTracing("my-service")
+    .AddOpenTelemetryMetrics("my-service")
+    .AddOtlpExporters()
+    .AddHealthChecksBuilder();
+
+// Web
+builder.Services
+    .AddProxyAwareHosting()
+    .AddOpenApiDefaults()
+    .AddTraceAwareProblemDetails()
+    .AddPerIpSlidingWindowRateLimit()
+    .AddDefaultOutputCache()
+    .AddBrotliGzipCompression()
+    .AddDefaultCorsPolicy("https://example.com");
+
+// Pipeline + auth
+builder.Services
+    .AddMediator(typeof(Program).Assembly)
+    .AddMediatorValidationBehavior()
+    .AddMediatorLoggingBehavior()
+    .AddJwtBearerAuthentication(o =>
+    {
+        o.Issuer   = "https://issuer";
+        o.Audience = "my-api";
+        o.JwksUri  = new Uri("https://issuer/.well-known/openid-configuration");
+    });
+
 var app = builder.Build();
+app.UseProxyAwareHosting();
+app.UseOwaspSecureHeaders();
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseRateLimiter();
+app.UseOutputCache();
+app.UseResponseCompression();
+app.MapOpenApiEndpoint();
 app.Run();
 ```
 

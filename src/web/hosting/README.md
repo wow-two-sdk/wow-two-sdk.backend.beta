@@ -11,8 +11,8 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Web.Hosting
 ## Usage
 
 ```csharp
-builder.Services.AddWowTwoHosting();
+builder.Services.AddProxyAwareHosting();
 
 var app = builder.Build();
-app.UseWowTwoHosting();   // adds forwarded headers + request decompression — call early
+app.UseProxyAwareHosting();   // adds forwarded headers + request decompression — call early
 ```

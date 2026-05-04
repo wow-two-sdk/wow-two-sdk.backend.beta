@@ -10,7 +10,7 @@ Provide a low-friction integration-test scaffold for ASP.NET Core APIs that cons
 
 ## Behavior
 
-### `WowTestHost<TEntryPoint>`
+### `WebApiTestHost<TEntryPoint>`
 
 - The class **MUST** extend `WebApplicationFactory<TEntryPoint>`.
 - The class **MUST** expose a `FakeTimeProvider Clock` field controllable from tests.
@@ -19,7 +19,7 @@ Provide a low-friction integration-test scaffold for ASP.NET Core APIs that cons
 - The class **MUST** allow consumers to mutate `IHostBuilder` via `ConfigureHostHook`.
 - The class **MUST NOT** force a specific environment (consumers control via `ConfigureHostHook`); default is `Production`.
 
-### `WowApiTest<TEntryPoint>`
+### `WebApiTestBase<TEntryPoint>`
 
 - The class **MUST** implement `IAsyncLifetime` and `IDisposable`.
 - The class **MUST** expose `Host`, `Client`, and `Clock` properties.
@@ -41,7 +41,7 @@ Provide a low-friction integration-test scaffold for ASP.NET Core APIs that cons
 
 ## Failure modes
 
-- If `WowTestHost.CreateClient()` is called before any `ConfigureServicesHook` registration runs, the hook **MUST** still execute as part of the host build — i.e. lazy access **MUST** trigger configuration application.
+- If `WebApiTestHost.CreateClient()` is called before any `ConfigureServicesHook` registration runs, the hook **MUST** still execute as part of the host build — i.e. lazy access **MUST** trigger configuration application.
 - If a fixture in a collection fails during `StartAsync`, already-started fixtures **MUST** still be disposed.
 
 ## Non-goals

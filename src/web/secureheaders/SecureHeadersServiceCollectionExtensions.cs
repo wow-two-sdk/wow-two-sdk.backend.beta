@@ -16,7 +16,7 @@ public static class SecureHeadersExtensions
     /// - Permissions-Policy: minimal
     /// - Cross-Origin-{Opener,Embedder,Resource}-Policy
     /// </summary>
-    public static IApplicationBuilder UseWowTwoSecureHeaders(this IApplicationBuilder app)
+    public static IApplicationBuilder UseOwaspSecureHeaders(this IApplicationBuilder app)
     {
         ArgumentNullException.ThrowIfNull(app);
 

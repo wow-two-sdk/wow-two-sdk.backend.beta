@@ -7,9 +7,9 @@ using NodaTime.Serialization.SystemTextJson;
 namespace WoW.Two.Sdk.Backend.Beta.Serialization;
 
 /// <summary>
-/// Conventional <see cref="JsonSerializerOptions"/> presets for the wow-two SDK.
+/// Conventional <see cref="JsonSerializerOptions"/> presets for the Wow Two backend SDK.
 /// </summary>
-public static class WowJsonOptions
+public static class JsonOptionsPresets
 {
     /// <summary>
     /// Default options: camelCase, ignore null on writes, NodaTime support, relaxed escaping.

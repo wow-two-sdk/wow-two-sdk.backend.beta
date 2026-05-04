@@ -10,7 +10,7 @@ WoW.Two.Sdk.Backend.Beta.Testing
 
 ## Public API
 
-### `WowTestHost<TEntryPoint>`
+### `WebApiTestHost<TEntryPoint>`
 
 | Member | Type | Notes |
 |---|---|---|
@@ -18,14 +18,14 @@ WoW.Two.Sdk.Backend.Beta.Testing
 | `ConfigureServicesHook` | `Action<IServiceCollection>?` | Init-only; runs in `ConfigureWebHost.ConfigureServices`. |
 | `ConfigureHostHook` | `Action<IHostBuilder>?` | Init-only; runs in `CreateHost`. |
 
-### `WowApiTest<TEntryPoint>`
+### `WebApiTestBase<TEntryPoint>`
 
 | Member | Type | Notes |
 |---|---|---|
-| `Host` | `WowTestHost<TEntryPoint>` | Lazy. |
+| `Host` | `WebApiTestHost<TEntryPoint>` | Lazy. |
 | `Client` | `HttpClient` | Calls `Host.CreateClient()` per access. |
 | `Clock` | `FakeTimeProvider` | Forwarded from `Host.Clock`. |
-| `BuildHost()` | virtual `WowTestHost<TEntryPoint>` | Override to compose fixtures. |
+| `BuildHost()` | virtual `WebApiTestHost<TEntryPoint>` | Override to compose fixtures. |
 | `InitializeAsync()` | virtual `ValueTask` | Override for per-test setup. |
 | `DisposeAsync()` | virtual `ValueTask` | Override for per-test teardown. |
 
@@ -57,7 +57,7 @@ WoW.Two.Sdk.Backend.Beta.Testing
 ### Plain integration test
 
 ```csharp
-public class HelloTests : WowApiTest<Program>
+public class HelloTests : WebApiTestBase<Program>
 {
     [Fact]
     public async Task Greets() =>
@@ -68,7 +68,7 @@ public class HelloTests : WowApiTest<Program>
 ### With container fixture
 
 ```csharp
-public class OrderTests : WowApiTest<Program>
+public class OrderTests : WebApiTestBase<Program>
 {
     private readonly PostgresFixture _pg = new();
 
@@ -78,7 +78,7 @@ public class OrderTests : WowApiTest<Program>
         await base.InitializeAsync();
     }
 
-    protected override WowTestHost<Program> BuildHost() => new()
+    protected override WebApiTestHost<Program> BuildHost() => new()
     {
         ConfigureServicesHook = s => s.AddDbContext<OrdersDb>(o => o.UseNpgsql(_pg.ConnectionString))
     };

@@ -12,7 +12,7 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Observability.Logging
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
-builder.Host.UseWowTwoLogging();
+builder.Host.UseSerilogConventional();
 // rest as normal — inject ILogger<T>
 ```
 

@@ -12,7 +12,7 @@ public static class ValidationServiceCollectionExtensions
     /// <summary>
     /// Registers all <see cref="IValidator{T}"/> implementations from the calling assembly.
     /// </summary>
-    public static IServiceCollection AddWowTwoValidation(this IServiceCollection services)
+    public static IServiceCollection AddFluentValidatorsFromAssemblies(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
         services.AddValidatorsFromAssembly(Assembly.GetCallingAssembly(), includeInternalTypes: true);
@@ -22,7 +22,7 @@ public static class ValidationServiceCollectionExtensions
     /// <summary>
     /// Registers all <see cref="IValidator{T}"/> implementations from the supplied assemblies.
     /// </summary>
-    public static IServiceCollection AddWowTwoValidation(this IServiceCollection services, params Assembly[] assemblies)
+    public static IServiceCollection AddFluentValidatorsFromAssemblies(this IServiceCollection services, params Assembly[] assemblies)
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(assemblies);

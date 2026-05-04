@@ -13,10 +13,10 @@ One paragraph: what the wrapper provides, why it exists.
 
 ### Registration
 
-- The package **MUST** expose `AddWowTwo{ModuleName}(this IServiceCollection)` returning `IServiceCollection`.
+- The package **MUST** expose `Add{ModuleName}(this IServiceCollection)` returning `IServiceCollection`.
 - The package **MUST** support both inline `Action<{ModuleName}Options>` and `IConfiguration`-based registration.
 - The package **MUST** call `ValidateOnStart()` on its options.
-- The package **SHOULD** be registered idempotently — multiple calls to `AddWowTwo{ModuleName}` **MUST NOT** double-register services.
+- The package **SHOULD** be registered idempotently — multiple calls to `Add{ModuleName}` **MUST NOT** double-register services.
 
 ### Options
 
@@ -38,7 +38,7 @@ One paragraph: what the wrapper provides, why it exists.
 
 ### Testing
 
-- The package **MUST** ship at least one xUnit test that calls `AddWowTwo{ModuleName}` and resolves the registered service.
+- The package **MUST** ship at least one xUnit test that calls `Add{ModuleName}` and resolves the registered service.
 
 ## Non-goals
 

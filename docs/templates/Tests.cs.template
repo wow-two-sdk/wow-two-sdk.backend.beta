@@ -17,13 +17,13 @@ namespace WoW.Two.Sdk.Backend.Beta.{AreaPath}.Tests;
 public class {ModuleName}ModuleTests
 {
     [Fact]
-    public void AddWowTwo{ModuleName}_RegistersService()
+    public void Add{ModuleName}_RegistersService()
     {
         // Arrange
         var services = new ServiceCollection();
 
         // Act
-        services.AddWowTwo{ModuleName}();
+        services.Add{ModuleName}();
         using var sp = services.BuildServiceProvider();
 
         // Assert
@@ -32,13 +32,13 @@ public class {ModuleName}ModuleTests
     }
 
     [Fact]
-    public void AddWowTwo{ModuleName}_WithOptions_AppliesConfiguration()
+    public void Add{ModuleName}_WithOptions_AppliesConfiguration()
     {
         // Arrange
         var services = new ServiceCollection();
 
         // Act
-        services.AddWowTwo{ModuleName}(opts =>
+        services.Add{ModuleName}(opts =>
         {
             opts.Example = "test-value";
         });

@@ -3,7 +3,7 @@ namespace WoW.Two.Sdk.Backend.Beta.Errors;
 /// <summary>
 /// Canonical error category — opinionated mapping to HTTP status codes.
 /// </summary>
-public enum WowErrorCategory
+public enum DomainErrorCategory
 {
     /// <summary>Caller sent invalid input. Maps to 400.</summary>
     Validation = 400,
@@ -37,40 +37,40 @@ public enum WowErrorCategory
 /// <param name="Message">Human-readable message. Localized when possible.</param>
 /// <param name="Category">Category controlling default HTTP mapping.</param>
 /// <param name="Detail">Optional additional context.</param>
-public sealed record WowError(
+public sealed record DomainError(
     string Code,
     string Message,
-    WowErrorCategory Category,
+    DomainErrorCategory Category,
     string? Detail = null)
 {
     /// <summary>HTTP status code derived from <see cref="Category"/>.</summary>
     public int StatusCode => (int)Category;
 
     /// <summary>Convenience factory — validation error.</summary>
-    public static WowError Validation(string code, string message, string? detail = null) =>
-        new(code, message, WowErrorCategory.Validation, detail);
+    public static DomainError Validation(string code, string message, string? detail = null) =>
+        new(code, message, DomainErrorCategory.Validation, detail);
 
     /// <summary>Convenience factory — not-found.</summary>
-    public static WowError NotFound(string code, string message, string? detail = null) =>
-        new(code, message, WowErrorCategory.NotFound, detail);
+    public static DomainError NotFound(string code, string message, string? detail = null) =>
+        new(code, message, DomainErrorCategory.NotFound, detail);
 
     /// <summary>Convenience factory — conflict.</summary>
-    public static WowError Conflict(string code, string message, string? detail = null) =>
-        new(code, message, WowErrorCategory.Conflict, detail);
+    public static DomainError Conflict(string code, string message, string? detail = null) =>
+        new(code, message, DomainErrorCategory.Conflict, detail);
 
     /// <summary>Convenience factory — forbidden.</summary>
-    public static WowError Forbidden(string code, string message, string? detail = null) =>
-        new(code, message, WowErrorCategory.Forbidden, detail);
+    public static DomainError Forbidden(string code, string message, string? detail = null) =>
+        new(code, message, DomainErrorCategory.Forbidden, detail);
 
     /// <summary>Convenience factory — unauthorized.</summary>
-    public static WowError Unauthorized(string code, string message, string? detail = null) =>
-        new(code, message, WowErrorCategory.Unauthorized, detail);
+    public static DomainError Unauthorized(string code, string message, string? detail = null) =>
+        new(code, message, DomainErrorCategory.Unauthorized, detail);
 
     /// <summary>Convenience factory — business-rule violation.</summary>
-    public static WowError BusinessRule(string code, string message, string? detail = null) =>
-        new(code, message, WowErrorCategory.BusinessRule, detail);
+    public static DomainError BusinessRule(string code, string message, string? detail = null) =>
+        new(code, message, DomainErrorCategory.BusinessRule, detail);
 
     /// <summary>Convenience factory — unexpected server error.</summary>
-    public static WowError Unexpected(string code, string message, string? detail = null) =>
-        new(code, message, WowErrorCategory.Unexpected, detail);
+    public static DomainError Unexpected(string code, string message, string? detail = null) =>
+        new(code, message, DomainErrorCategory.Unexpected, detail);
 }

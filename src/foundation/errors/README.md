@@ -1,6 +1,6 @@
 # WoW.Two.Sdk.Backend.Beta.Errors
 
-> Canonical `WowError` record + category-to-HTTP-status mapping. Thin building block consumed by the validation pipeline, mediator behaviors, and ProblemDetails mappers.
+> Canonical `DomainError` record + category-to-HTTP-status mapping. Thin building block consumed by the validation pipeline, mediator behaviors, and ProblemDetails mappers.
 
 ## Install
 
@@ -16,7 +16,7 @@ using WoW.Two.Sdk.Backend.Beta.Errors;
 public ErrorOr<User> GetUser(Guid id) =>
     _repo.Find(id) is { } user
         ? user
-        : WowError.NotFound("user.not_found", "User not found");
+        : DomainError.NotFound("user.not_found", "User not found");
 ```
 
 `StatusCode` is derived from the `Category` enum value — no manual mapping needed.

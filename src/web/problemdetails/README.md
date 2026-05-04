@@ -11,14 +11,14 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Web.ProblemDetails
 ## Usage
 
 ```csharp
-builder.Services.AddWowTwoProblemDetails();
+builder.Services.AddTraceAwareProblemDetails();
 
 var app = builder.Build();
 app.UseExceptionHandler();
 app.UseStatusCodePages();
 ```
 
-Throw `Microsoft.AspNetCore.Http.BadHttpRequestException` etc. — they map to ProblemDetails automatically. Or return `WowError`-shaped results from your handlers and convert via the [`Errors`](../../foundation/errors/README.md) package.
+Throw `Microsoft.AspNetCore.Http.BadHttpRequestException` etc. — they map to ProblemDetails automatically. Or return `DomainError`-shaped results from your handlers and convert via the [`Errors`](../../foundation/errors/README.md) package.
 
 ## See also
 

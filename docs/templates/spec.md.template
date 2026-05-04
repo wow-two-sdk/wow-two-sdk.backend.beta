@@ -18,16 +18,16 @@ using WoW.Two.Sdk.Backend.Beta.{AreaPath};
 var builder = WebApplication.CreateBuilder(args);
 
 // Default registration
-builder.Services.AddWowTwo{ModuleName}();
+builder.Services.Add{ModuleName}();
 
 // Or with options
-builder.Services.AddWowTwo{ModuleName}(opts =>
+builder.Services.Add{ModuleName}(opts =>
 {
     opts.Example = "custom";
 });
 
 // Or from config (binds section "{ModuleName}" by default)
-builder.Services.AddWowTwo{ModuleName}(builder.Configuration);
+builder.Services.Add{ModuleName}(builder.Configuration);
 
 var app = builder.Build();
 app.Run();
@@ -39,9 +39,9 @@ app.Run();
 
 | Method | Returns | Notes |
 |---|---|---|
-| `AddWowTwo{ModuleName}(this IServiceCollection)` | `IServiceCollection` | Default options |
-| `AddWowTwo{ModuleName}(this IServiceCollection, Action<{ModuleName}Options>)` | `IServiceCollection` | Inline configurator |
-| `AddWowTwo{ModuleName}(this IServiceCollection, IConfiguration, string sectionName = "{ModuleName}")` | `IServiceCollection` | Bind from `IConfiguration` |
+| `Add{ModuleName}(this IServiceCollection)` | `IServiceCollection` | Default options |
+| `Add{ModuleName}(this IServiceCollection, Action<{ModuleName}Options>)` | `IServiceCollection` | Inline configurator |
+| `Add{ModuleName}(this IServiceCollection, IConfiguration, string sectionName = "{ModuleName}")` | `IServiceCollection` | Bind from `IConfiguration` |
 
 ### `{ModuleName}Options`
 
@@ -58,13 +58,13 @@ app.Run();
 ### Example A — minimal
 
 ```csharp
-services.AddWowTwo{ModuleName}();
+services.Add{ModuleName}();
 ```
 
 ### Example B — typed
 
 ```csharp
-services.AddWowTwo{ModuleName}(opts =>
+services.Add{ModuleName}(opts =>
 {
     opts.Example = "value";
 });
@@ -86,7 +86,7 @@ await svc.DoSomethingAsync();
 ```
 
 ```csharp
-services.AddWowTwo{ModuleName}(builder.Configuration);
+services.Add{ModuleName}(builder.Configuration);
 ```
 
 ## See also

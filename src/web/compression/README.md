@@ -11,7 +11,7 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Web.Compression
 ## Usage
 
 ```csharp
-builder.Services.AddWowTwoCompression();
+builder.Services.AddBrotliGzipCompression();
 
 var app = builder.Build();
 app.UseResponseCompression();

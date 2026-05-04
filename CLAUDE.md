@@ -23,7 +23,7 @@ See [`targets.md` §6](./docs/analysis/philosophy/targets.md#6-phase-mapping). Q
 |---|---|---|
 | P0 | testing scaffold (parallel track) | ✅ shipped (12 packages) |
 | P1 | boot floor — foundation + observability + web basics | ✅ shipped (24 packages: 7 foundation + 8 observability + 9 web) |
-| P2 | request pipeline + auth | planned |
+| P2 | request pipeline + auth | ✅ shipped (16 packages: 5 mediator + 11 identity) |
 | P3 | persistence + outbound | planned |
 | P4 | distributed essentials | planned |
 | P5 | SaaS-shaped (tenancy + AI + flags) | planned |
@@ -68,12 +68,14 @@ Every wrapper folder follows:
 ```
 src/<area>/<package>/
 ├── WoW.Two.Sdk.Backend.Beta.<Domain>.csproj
-├── <Module>ServiceCollectionExtensions.cs   ← `AddWowTwo<Domain>` extension
+├── <Module>ServiceCollectionExtensions.cs   ← descriptive `Add<Concrete>` extension(s)
 ├── <Public types>.cs
 ├── <Module>.standard.md                     ← RFC 2119 contract (when API has shape)
 ├── <Module>.spec.md                         ← API + usage snippets (when API has shape)
 └── README.md                                ← 1-screen quickstart + see-also
 ```
+
+**Naming**: package id carries the brand (`WoW.Two.Sdk.Backend.Beta.<Area>`), but **method/class names do NOT have a `WowTwo` prefix** — they describe what they actually do (e.g. `AddJwtBearerAuthentication`, `AddOpenTelemetryTracing`, `UseOwaspSecureHeaders`, `JsonOptionsPresets`, `WebApiTestBase<T>`). Mirrors the older `Backbone.Language.Features.Serialization` package convention. See [`docs/conventions/naming.md`](./docs/conventions/naming.md).
 
 Tiny adapter packages (e.g. each container engine) ship just csproj + main file + README. Standard/spec are reserved for packages where the API has non-trivial shape.
 
@@ -100,7 +102,7 @@ Set `MSBUILDDISABLENODEREUSE=1` and `ulimit -n 65535` if you hit "too many open 
 
 `WoW.Two.Sdk.Backend.Beta.<Area>[.<SubArea>]` — see [`docs/conventions/naming.md`](./docs/conventions/naming.md).
 
-Registration always: `services.AddWowTwo<Area>(...)`.
+Registration: descriptive method names without `WowTwo` prefix — `services.AddJwtBearerAuthentication(...)`, `services.AddPerIpSlidingWindowRateLimit()`, `services.AddOpenTelemetryTracing(...)`. The package name carries the brand; the method name carries the meaning.
 
 ## Documentation strategy
 

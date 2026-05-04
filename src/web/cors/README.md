@@ -11,7 +11,7 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Web.Cors
 ## Usage
 
 ```csharp
-builder.Services.AddWowTwoCors("https://example.com", "https://app.example.com");
+builder.Services.AddDefaultCorsPolicy("https://example.com", "https://app.example.com");
 
 var app = builder.Build();
 app.UseCors(CorsServiceCollectionExtensions.DefaultPolicyName);

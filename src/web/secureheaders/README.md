@@ -12,7 +12,7 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Web.SecureHeaders
 
 ```csharp
 var app = builder.Build();
-app.UseWowTwoSecureHeaders();
+app.UseOwaspSecureHeaders();
 ```
 
 Headers applied: HSTS · X-Content-Type-Options · X-Frame-Options: DENY · Referrer-Policy · Permissions-Policy · Cross-Origin-{Opener,Embedder,Resource}-Policy · Server header removed.

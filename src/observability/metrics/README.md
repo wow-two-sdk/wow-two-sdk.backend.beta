@@ -11,8 +11,8 @@ dotnet add package WoW.Two.Sdk.Backend.Beta.Observability.Metrics
 ## Usage
 
 ```csharp
-builder.Services.AddWowTwoMetrics("my-service");
-builder.Services.AddWowTwoOtlpExporter("https://collector:4317");
+builder.Services.AddOpenTelemetryMetrics("my-service");
+builder.Services.AddOtlpExporters("https://collector:4317");
 ```
 
 Auto-instrumented: ASP.NET Core · HttpClient · .NET runtime (GC, threadpool, JIT) · Process (CPU, memory).
