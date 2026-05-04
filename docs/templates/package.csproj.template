@@ -1,0 +1,29 @@
+<!--
+  Template csproj for a wrapper package.
+  Replace placeholders:
+    {AreaPath}     — dotted package id area, e.g. "Caching.Redis"
+    {Description}  — one-line NuGet description
+    {PackageRefs}  — additional <PackageReference> nodes (one-per-line)
+
+  Properties NOT specified here come from src/Directory.Build.props (TargetFramework, LangVersion, Nullable, IsPackable, DocFile, etc.)
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>{Description}</Description>
+    <PackageTags>wow-two; backend; beta; {AreaPath}</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    {PackageRefs}
+  </ItemGroup>
+
+  <!--
+    For packages that depend on a sibling wrapper, prefer ProjectReference during dev:
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\foundation\time\WoW.Two.Sdk.Backend.Beta.Time.csproj" />
+    </ItemGroup>
+  -->
+
+</Project>

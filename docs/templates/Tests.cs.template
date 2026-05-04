@@ -1,0 +1,50 @@
+// {ModuleName}.tests.cs — runnable usage examples + smoke tests.
+//
+// These tests serve a dual purpose:
+//   1. Demonstrate the canonical usage of the wrapper (Storybook-equivalent).
+//   2. Catch breakage when the underlying lib changes.
+//
+// Convention:
+//   - One Fact per usage scenario.
+//   - Test class name: {ModuleName}ModuleTests.
+//   - Use FakeLogger / FakeTimeProvider / FakeMeter where time/log/metric assertions matter.
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+namespace WoW.Two.Sdk.Backend.Beta.{AreaPath}.Tests;
+
+public class {ModuleName}ModuleTests
+{
+    [Fact]
+    public void AddWowTwo{ModuleName}_RegistersService()
+    {
+        // Arrange
+        var services = new ServiceCollection();
+
+        // Act
+        services.AddWowTwo{ModuleName}();
+        using var sp = services.BuildServiceProvider();
+
+        // Assert
+        // var svc = sp.GetRequiredService<I{ModuleName}>();
+        // Assert.NotNull(svc);
+    }
+
+    [Fact]
+    public void AddWowTwo{ModuleName}_WithOptions_AppliesConfiguration()
+    {
+        // Arrange
+        var services = new ServiceCollection();
+
+        // Act
+        services.AddWowTwo{ModuleName}(opts =>
+        {
+            opts.Example = "test-value";
+        });
+
+        // Assert
+        // var opts = services.BuildServiceProvider().GetRequiredService<IOptions<{ModuleName}Options>>();
+        // Assert.Equal("test-value", opts.Value.Example);
+    }
+}

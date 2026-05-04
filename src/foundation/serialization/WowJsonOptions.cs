@@ -1,0 +1,42 @@
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using NodaTime;
+using NodaTime.Serialization.SystemTextJson;
+
+namespace WoW.Two.Sdk.Backend.Beta.Serialization;
+
+/// <summary>
+/// Conventional <see cref="JsonSerializerOptions"/> presets for the wow-two SDK.
+/// </summary>
+public static class WowJsonOptions
+{
+    /// <summary>
+    /// Default options: camelCase, ignore null on writes, NodaTime support, relaxed escaping.
+    /// </summary>
+    public static JsonSerializerOptions Default { get; } = Build();
+
+    /// <summary>
+    /// Same as <see cref="Default"/> but with indented output. Use for human-readable dumps.
+    /// </summary>
+    public static JsonSerializerOptions Indented { get; } = Build(opt => opt.WriteIndented = true);
+
+    private static JsonSerializerOptions Build(Action<JsonSerializerOptions>? customize = null)
+    {
+        var options = new JsonSerializerOptions(JsonSerializerDefaults.Web)
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            ReadCommentHandling = JsonCommentHandling.Skip,
+            AllowTrailingCommas = true,
+            NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.AllowNamedFloatingPointLiterals,
+        };
+
+        options.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb);
+        customize?.Invoke(options);
+        options.MakeReadOnly();
+        return options;
+    }
+}

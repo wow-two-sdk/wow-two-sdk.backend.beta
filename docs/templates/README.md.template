@@ -1,0 +1,26 @@
+# WoW.Two.Sdk.Backend.Beta.{AreaPath}
+
+> {Description}
+
+## Install
+
+```
+dotnet add package WoW.Two.Sdk.Backend.Beta.{AreaPath}
+```
+
+## Usage
+
+```csharp
+using WoW.Two.Sdk.Backend.Beta.{AreaPath};
+
+builder.Services.AddWowTwo{ModuleName}();
+```
+
+## Spec
+
+- [Standard]({ModuleName}.standard.md) — behavioral contract
+- [Spec]({ModuleName}.spec.md) — API + usage examples
+
+## See also
+
+- Underlying lib: [name](url)

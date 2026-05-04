@@ -1,0 +1,46 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Build output
+bin/
+obj/
+out/
+TestResults/
+artifacts/
+publish/
+.nuget/
+
+# NuGet packages produced locally
+*.nupkg
+*.snupkg
+
+# Logs
+*.log
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# macOS Spotlight, Trash
+.AppleDouble
+.LSOverride
+.Trashes
+Icon?
+
+# coverage
+coverage/
+*.coverage
+*.coveragexml
+
+# misc
+.local/
+local/
+.envrc

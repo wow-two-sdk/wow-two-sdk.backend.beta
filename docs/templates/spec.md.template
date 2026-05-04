@@ -1,0 +1,95 @@
+# {ModuleName} — spec
+
+*Last updated: YYYY-MM-DD*
+
+> **Concrete API + usage.** Updated when public surface changes.
+
+## NuGet
+
+```
+WoW.Two.Sdk.Backend.Beta.{AreaPath}
+```
+
+## Quick start
+
+```csharp
+using WoW.Two.Sdk.Backend.Beta.{AreaPath};
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Default registration
+builder.Services.AddWowTwo{ModuleName}();
+
+// Or with options
+builder.Services.AddWowTwo{ModuleName}(opts =>
+{
+    opts.Example = "custom";
+});
+
+// Or from config (binds section "{ModuleName}" by default)
+builder.Services.AddWowTwo{ModuleName}(builder.Configuration);
+
+var app = builder.Build();
+app.Run();
+```
+
+## Public API
+
+### `{ModuleName}ServiceCollectionExtensions`
+
+| Method | Returns | Notes |
+|---|---|---|
+| `AddWowTwo{ModuleName}(this IServiceCollection)` | `IServiceCollection` | Default options |
+| `AddWowTwo{ModuleName}(this IServiceCollection, Action<{ModuleName}Options>)` | `IServiceCollection` | Inline configurator |
+| `AddWowTwo{ModuleName}(this IServiceCollection, IConfiguration, string sectionName = "{ModuleName}")` | `IServiceCollection` | Bind from `IConfiguration` |
+
+### `{ModuleName}Options`
+
+| Property | Type | Default | Notes |
+|---|---|---|---|
+| `Example` | `string` | `"default"` | Required (validated) |
+
+### Public types exposed by this package
+
+(List the types — interfaces, services, attributes, etc. — that consumers import.)
+
+## Usage examples
+
+### Example A — minimal
+
+```csharp
+services.AddWowTwo{ModuleName}();
+```
+
+### Example B — typed
+
+```csharp
+services.AddWowTwo{ModuleName}(opts =>
+{
+    opts.Example = "value";
+});
+
+// Resolve and use
+var svc = host.Services.GetRequiredService<I{ModuleName}>();
+await svc.DoSomethingAsync();
+```
+
+### Example C — from configuration
+
+```jsonc
+// appsettings.json
+{
+  "{ModuleName}": {
+    "Example": "value"
+  }
+}
+```
+
+```csharp
+services.AddWowTwo{ModuleName}(builder.Configuration);
+```
+
+## See also
+
+- Standard: [{ModuleName}.standard.md](./{ModuleName}.standard.md)
+- Underlying lib: [name](url)

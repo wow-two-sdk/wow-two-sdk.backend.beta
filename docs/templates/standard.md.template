@@ -1,0 +1,50 @@
+# {ModuleName} — standard
+
+*Last updated: YYYY-MM-DD*
+
+> **Behavioral contract.** RFC 2119 keywords (MUST / SHOULD / MAY).
+> Survives API churn — only changes when the *contract* changes, not when implementation moves.
+
+## Purpose
+
+One paragraph: what the wrapper provides, why it exists.
+
+## Behavior
+
+### Registration
+
+- The package **MUST** expose `AddWowTwo{ModuleName}(this IServiceCollection)` returning `IServiceCollection`.
+- The package **MUST** support both inline `Action<{ModuleName}Options>` and `IConfiguration`-based registration.
+- The package **MUST** call `ValidateOnStart()` on its options.
+- The package **SHOULD** be registered idempotently — multiple calls to `AddWowTwo{ModuleName}` **MUST NOT** double-register services.
+
+### Options
+
+- All options **MUST** live on the `{ModuleName}Options` record.
+- All options **MUST** be init-only.
+- Options **MUST** validate via DataAnnotations or FluentValidation.
+- Defaults **MUST** be safe in development without further config.
+
+### Diagnostics
+
+- The wrapper **MUST** define an `ActivitySource` named `WoW.Two.{AreaPath}` for any traceable operation.
+- The wrapper **MUST** define a `Meter` named `WoW.Two.{AreaPath}` for any metric it emits.
+- The wrapper **SHOULD** emit logs through `ILogger<{ModuleName}>` only — never directly to a sink.
+
+### Failure modes
+
+- The wrapper **MUST** throw `InvalidOperationException` when registration is misconfigured at startup (caught by `ValidateOnStart()`).
+- The wrapper **SHOULD** throw `OperationCanceledException` when a `CancellationToken` is canceled — never swallow.
+
+### Testing
+
+- The package **MUST** ship at least one xUnit test that calls `AddWowTwo{ModuleName}` and resolves the registered service.
+
+## Non-goals
+
+- What this wrapper deliberately does NOT do.
+
+## See also
+
+- Underlying lib: [name](url)
+- Spec file: `{ModuleName}.spec.md`

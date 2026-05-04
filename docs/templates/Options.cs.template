@@ -1,0 +1,23 @@
+// {ModuleName}Options.cs — bindable, validatable options record.
+//
+// Conventions:
+//   - record with init-only properties
+//   - DataAnnotations for validation (source-gen friendly)
+//   - Sensible defaults
+//   - All members documented
+
+using System.ComponentModel.DataAnnotations;
+
+namespace WoW.Two.Sdk.Backend.Beta.{AreaPath};
+
+/// <summary>
+/// Options for the {AreaPath} wrapper.
+/// </summary>
+public sealed record {ModuleName}Options
+{
+    /// <summary>
+    /// Example option. Replace.
+    /// </summary>
+    [Required]
+    public string Example { get; init; } = "default";
+}

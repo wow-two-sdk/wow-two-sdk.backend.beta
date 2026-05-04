@@ -1,0 +1,71 @@
+# Top-most EditorConfig file
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+
+[*.cs]
+indent_size = 4
+
+# csharp basics
+csharp_using_directive_placement = outside_namespace:warning
+csharp_prefer_simple_using_statement = true:suggestion
+csharp_style_namespace_declarations = file_scoped:warning
+csharp_style_var_for_built_in_types = false:silent
+csharp_style_var_when_type_is_apparent = true:silent
+csharp_style_var_elsewhere = false:suggestion
+
+# Expressions
+csharp_style_expression_bodied_methods = when_on_single_line:silent
+csharp_style_expression_bodied_constructors = when_on_single_line:silent
+csharp_style_expression_bodied_properties = when_on_single_line:suggestion
+
+# Nullable
+dotnet_diagnostic.CS8600.severity = error
+dotnet_diagnostic.CS8601.severity = error
+dotnet_diagnostic.CS8602.severity = error
+dotnet_diagnostic.CS8603.severity = error
+dotnet_diagnostic.CS8604.severity = error
+dotnet_diagnostic.CS8618.severity = error
+
+# Public API documentation enforcement
+dotnet_diagnostic.CS1591.severity = warning
+
+# Meziantou — pragmatic warnings
+dotnet_diagnostic.MA0048.severity = none      # File name must match type name (Module/Options pairs)
+dotnet_diagnostic.MA0051.severity = suggestion # Method too long
+
+# Suppress "Use a primary constructor" for old-style classes — allow either
+dotnet_diagnostic.IDE0290.severity = silent
+
+# CA1711 — banned suffixes ("Collection", "Stream", etc.). Our naming is intentional.
+dotnet_diagnostic.CA1711.severity = silent
+
+# CA1062 — null-arg validation. Nullable references handle this; not worth the noise.
+dotnet_diagnostic.CA1062.severity = silent
+
+# CA1812 — internal types instantiated only via reflection. Common in DI scenarios.
+dotnet_diagnostic.CA1812.severity = silent
+
+# CA1056 — URI parameters. Connection strings often look like URIs but stay strings.
+dotnet_diagnostic.CA1056.severity = silent
+
+# CA1054 — URI parameters typed as Uri. Same reason.
+dotnet_diagnostic.CA1054.severity = silent
+
+# Async naming
+dotnet_diagnostic.VSTHRD200.severity = warning
+
+[*.{props,targets,csproj}]
+indent_size = 2
+
+[*.{json,yml,yaml,md}]
+indent_size = 2
+
+[*.sln]
+indent_size = 4
+end_of_line = crlf
