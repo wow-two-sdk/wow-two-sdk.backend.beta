@@ -1,0 +1,59 @@
+name: publish
+
+# Beta-forever: every push to main packs and publishes a new build to nuget.org.
+#
+# Version = 10.{y}.{z}
+#   x = 10  → the .NET line (fixed)
+#   z       → commit count mod 100   (bumps every commit)
+#   y       → commit count div 100   (bumps each time z rolls past 99)
+#
+# It's a stateless linear build counter derived from history — no version file to
+# write back, no nuget query, so no self-triggering loop and no races.
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-nuget
+  cancel-in-progress: false   # never cancel a half-finished publish
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0        # REQUIRED: full history so `rev-list --count` is real (default shallow = 1)
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Compute version (10.y.z from commit count)
+        id: ver
+        run: |
+          N=$(git rev-list --count HEAD)
+          VERSION="10.$((N / 100)).$((N % 100))"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "::notice::Publishing $VERSION (commit #$N)"
+
+      - name: Pack
+        run: >
+          dotnet pack src/WoW.Two.Sdk.Backend.Beta.csproj
+          -c Release
+          -p:Version=${{ steps.ver.outputs.version }}
+          -p:FileVersion=${{ steps.ver.outputs.version }}
+          -p:ContinuousIntegrationBuild=true
+          -o artifacts
+
+      - name: Push to nuget.org   # the adjacent .snupkg is pushed automatically
+        run: >
+          dotnet nuget push "artifacts/*.nupkg"
+          -s https://api.nuget.org/v3/index.json
+          -k ${{ secrets.NUGET_API_KEY }}
+          --skip-duplicate

@@ -37,6 +37,7 @@
 | `WoW.Two.Sdk.Backend.Beta.Serialization` | `JsonOptionsPresets` (camelCase + NodaTime + lenient input) | shipped |
 | `WoW.Two.Sdk.Backend.Beta.Guards` | `IdentifierGuardExtensions` (`NotSlug`, `NotUlid`) on top of Ardalis.GuardClauses | shipped |
 | `WoW.Two.Sdk.Backend.Beta.ValueObjects` | Re-exports Vogen + StronglyTypedId source generators | shipped |
+| `WoW.Two.Sdk.Backend.Beta.Naming` | **Casing authority** — `CaseStyle` enum (10 styles), `WordTokenizer` (acronym/digit-aware split), `CaseConverter` + string extensions, reversible `EnumNameConverter<TEnum>`. Zero deps. Source for column / enum-label / SQL-identifier casing. | shipped |
 
 ### Observability
 
@@ -97,7 +98,7 @@
 | Package | Niche | Status |
 |---|---|---|
 | `WoW.Two.Sdk.Backend.Beta.Data` | Meta — wires Abstractions + EF Core + Audit + SoftDelete + NamingConventions + Json + Ef Migrations runner | scaffold |
-| `WoW.Two.Sdk.Backend.Beta.Data.Abstractions` | Entity contracts — `IEntity`, `IKeyedEntity<TId>`, `IAuditable`/`ICreationAuditable`/`IModificationAuditable` (+ `…By<TUserId>` actor variants), `ISoftDeletable`/`ISoftDeletableBy<TUserId>`, `IHasTenant<TTenantId>`, `IRowVersioned`, `IHasXmin`, `IVersioned`. Zero deps. | scaffold |
+| `WoW.Two.Sdk.Backend.Beta.Data.Abstractions` | Entity contracts — `IEntity`, `IKeyedEntity<TId>`, `IHasTableName` (static-abstract `TableName`), `IAuditable`/`ICreationAuditable`/`IModificationAuditable` (+ `…By<TUserId>` actor variants), `ISoftDeletable`/`ISoftDeletableBy<TUserId>`, `IHasTenant<TTenantId>`, `IRowVersioned`, `IHasXmin`, `IVersioned`. Zero deps. | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore` | `AppDbContextBase` + `AddEntityFrameworkCore<TContext>` (pooling + config scanner) | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore.SqlServer` | `UseSqlServerConventional` — retry-on-failure (6×), 30s command timeout | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore.Postgres` | `UseNpgsqlConventional` — retry + NpgsqlDataSource overload for enum mapping | scaffold |
@@ -108,10 +109,11 @@
 | `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore.SoftDelete` | `SoftDeleteInterceptor` (DELETE→UPDATE) + `ApplySoftDeleteFilter` ModelBuilder ext | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore.NamingConventions` | `UseSnakeCase/LowerCase/CamelCase/UpperSnakeCaseNamingConvention` | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore.Json` | `JsonValueConverter<T>` + `JsonValueComparer<T>` + `HasJsonConversion()` PropertyBuilder ext | scaffold |
+| `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore` (Naming) | `EnumCaseConverter<TEnum>` (reversible string enum via `Naming`) + `HasEnumStringConversion()` PropertyBuilder ext | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore.Bulk` | EFCore.BulkExtensions re-export (BulkInsert/Update/Delete) | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore.Triggered` | `UseTriggersConventional` + `AddTriggersFromAssemblies` | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore.Projectables` | `UseProjectablesConventional` — `[Projectable]` computed properties | scaffold |
-| `WoW.Two.Sdk.Backend.Beta.Data.Dapper` | `AddDapperConventions` (snake_case + DateOnly + ListTypeHandler), `IDbConnectionFactory` | scaffold |
+| `WoW.Two.Sdk.Backend.Beta.Data.Dapper` | `AddDapperConventions` (snake_case + DateOnly + ListTypeHandler), `IDbConnectionFactory`, `SqlNaming` (`Col`/`Par`/`Table`, string + expression overloads), `EnumTypeHandler<TEnum>` (reversible string enum, `AddEnumTypeHandler<T>`) | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.Migrations.Ef` | `AddEfMigrationsRunner<TContext>` — hosted service with connect-retry | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.Migrations.DbUp` | `AddDbUpRunner` — hosted service + provider factories (Postgres/SqlServer/MySql/Sqlite) | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.Specifications` | `AddSpecificationRepository<TContext>` — Ardalis.Specification generic repo | scaffold |

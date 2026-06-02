@@ -1,5 +1,6 @@
 using Dapper;
 using Microsoft.Extensions.DependencyInjection;
+using WoW.Two.Sdk.Backend.Beta.Naming;
 
 namespace WoW.Two.Sdk.Backend.Beta.Data.Dapper;
 
@@ -30,6 +31,19 @@ public static class DapperServiceCollectionExtensions
             SqlMapper.AddTypeHandler(new ListTypeHandler<string>());
         }
 
+        return services;
+    }
+
+    /// <summary>
+    /// Registers a string-backed <see cref="EnumTypeHandler{TEnum}"/> so <typeparamref name="TEnum"/>
+    /// maps to/from a case-styled text column (default <see cref="CaseStyle.Snake"/>). Portable across
+    /// providers — for Postgres native enum types, use Npgsql's <c>MapEnum</c> instead.
+    /// </summary>
+    public static IServiceCollection AddEnumTypeHandler<TEnum>(this IServiceCollection services, CaseStyle style = CaseStyle.Snake)
+        where TEnum : struct, Enum
+    {
+        ArgumentNullException.ThrowIfNull(services);
+        SqlMapper.AddTypeHandler(new EnumTypeHandler<TEnum>(style));
         return services;
     }
 

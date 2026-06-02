@@ -1,10 +1,26 @@
 # Data layer — Dapper + naming/casing extraction (Haven → SDK)
 
-*Status: brainstorm / draft · 2026-05-31*
+*Status: partially implemented · 2026-06-01*
 
 Mining Haven's real-world Dapper + Postgres data layer for what belongs in the SDK's P3 `data` packages. The recurring theme is **casing**: every storage concern (columns, enum labels, JSON keys) is snake_case, wired four different ways. A single casing authority is the unlock for most of the extractions below.
 
 Haven source paths are relative to `…/workbench/ventures/10x-ven-haven/platform/src/backend-services/`.
+
+## ✅ Implemented (2026-06-01)
+
+Decisions taken: **hand-rolled** casing engine (no Humanizer dep) · **string** enum handler default (Npgsql-native opt-in) · **explicit `IHasTableName`** · **both** string + expression `Col`/`Par`.
+
+- **`Foundation.Naming`** (`src/Foundation/Naming/`) — `CaseStyle` (10 styles), `WordTokenizer` (acronym-run + digit-boundary aware; fixes Haven's `HTTPStatus`→`h_t_t_p_status` bug), `CaseConverter` + `CaseStringExtensions`, reversible `EnumNameConverter<TEnum>` (reverse map from members → no underscore-stripping fallback). Validated against 15 edge cases inc. enum round-trip.
+- **`Data.Abstractions.IHasTableName`** — static-abstract `TableName`.
+- **`Data.Dapper.SqlNaming`** — `Col`/`Par`/`ParRef`/`Table` with string + expression overloads (value-type boxing unwrapped); configurable `ColumnCase`/`ParameterCase`.
+- **`Data.Dapper.EnumTypeHandler<TEnum>`** + `AddEnumTypeHandler<T>(style)` — reversible string enum, cross-provider.
+- **`Data.EntityFrameworkCore.Naming.EnumCaseConverter<TEnum>`** + `HasEnumStringConversion()` — EF mirror of the Dapper handler.
+
+**Known convention call:** digit boundaries split (`TotalAreaCm2` → `total_area_cm_2`). Correct tokenization, but differs from Haven's `total_area_cm2`. If a "glue trailing digits to prior token" mode is wanted, add a tokenizer option later. Not blocking.
+
+**Still open from below:** reflection `MapEnums(assembly, style)` for Npgsql double-registry (3d); table-name *convention* default (chose explicit-only for now); JSON preset consolidation already covered by existing `JsonValueConverter<T>`.
+
+---
 
 ---
 
