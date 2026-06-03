@@ -41,16 +41,17 @@ jobs:
         id: ver
         run: |
           N=$(git rev-list --count HEAD)
-          VERSION="10.$((N / 100)).$((N % 100))-beta"
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "::notice::Publishing $VERSION (commit #$N)"
+          CORE="10.$((N / 100)).$((N % 100))"               # numeric core — for FileVersion (no suffix allowed)
+          echo "version=$CORE-beta"   >> "$GITHUB_OUTPUT"   # package version (prerelease label)
+          echo "fileversion=$CORE"    >> "$GITHUB_OUTPUT"   # assembly FileVersion (numeric only)
+          echo "::notice::Publishing $CORE-beta (commit #$N)"
 
       - name: Pack
         run: >
           dotnet pack src/WoW.Two.Sdk.Backend.Beta.csproj
           -c Release
           -p:Version=${{ steps.ver.outputs.version }}
-          -p:FileVersion=${{ steps.ver.outputs.version }}
+          -p:FileVersion=${{ steps.ver.outputs.fileversion }}
           -p:ContinuousIntegrationBuild=true
           -o artifacts
 
