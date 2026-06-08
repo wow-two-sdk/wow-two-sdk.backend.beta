@@ -19,6 +19,12 @@
 
 **52 packages shipped**, 130+ planned. See [`docs/conventions/package-registry.md`](./docs/conventions/package-registry.md).
 
+## Active design work
+
+In-progress patterns being designed/built — read these to know what's underway:
+
+- [`docs/analysis/validation-and-result-pattern.md`](./docs/analysis/validation-and-result-pattern.md) — validation result model (Stage 1, building now) + the deferred generic `Result`/`Error` pattern.
+
 ## Quick start
 
 ```csharp
