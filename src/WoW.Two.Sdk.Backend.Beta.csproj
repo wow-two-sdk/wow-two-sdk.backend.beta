@@ -18,6 +18,8 @@
   -->
 
   <PropertyGroup>
+    <!-- Published ID uses the OWNED WoW2.* reserved prefix. Assembly + namespaces remain WoW.Two.* (full rename later). -->
+    <PackageId>WoW2.Sdk.Backend.Beta</PackageId>
     <Description>WoW Two backend SDK (beta-forever mono-lib) — foundation, observability, web, mediator, identity, and data concerns in one package, divided by folders.</Description>
     <PackageTags>wow-two; backend; beta; sdk; aspnet; mono</PackageTags>
 
