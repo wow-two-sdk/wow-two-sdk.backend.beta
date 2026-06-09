@@ -101,7 +101,7 @@
 | `WoW.Two.Sdk.Backend.Beta.Data.Abstractions` | Entity contracts — `IEntity`, `IKeyedEntity<TId>`, `IHasTableName` (static-abstract `TableName`), `IAuditable`/`ICreationAuditable`/`IModificationAuditable` (+ `…By<TUserId>` actor variants), `ISoftDeletable`/`ISoftDeletableBy<TUserId>`, `IHasTenant<TTenantId>`, `IRowVersioned`, `IHasXmin`, `IVersioned`; repository contracts `IReadRepository<TEntity,TId>` + `IRepository<TEntity,TId>` (Create/Update/Delete/Get verbs). Zero deps. | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore` | `AppDbContextBase` + `AddEntityFrameworkCore<TContext>` (pooling + config scanner) | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore.SqlServer` | `UseSqlServerConventional` — retry-on-failure (6×), 30s command timeout | scaffold |
-| `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore.Postgres` | `UseNpgsqlConventional` — retry + NpgsqlDataSource overload for enum mapping | scaffold |
+| `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore.Postgres` | `UseNpgsqlConventional` — retry + NpgsqlDataSource overload for enum mapping; `AddNpgsqlDataSource`; `MapEnums(style, nsFilter, …, assemblies)` (reflection bulk enum registration via casing engine, kills double-registry) + `CaseStyleNameTranslator`; `ApplyNpgsqlConventions` (xmin token) | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore.MySql` | `UseMySqlConventional` — Pomelo + AutoDetect server version | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore.Sqlite` | `UseSqliteConventional` — 30s command timeout | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore.Cosmos` | `UseCosmosConventional` — connection-string + endpoint+key overloads | scaffold |
@@ -114,7 +114,7 @@
 | `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore.Bulk` | EFCore.BulkExtensions re-export (BulkInsert/Update/Delete) | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore.Triggered` | `UseTriggersConventional` + `AddTriggersFromAssemblies` | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.EntityFrameworkCore.Projectables` | `UseProjectablesConventional` — `[Projectable]` computed properties | scaffold |
-| `WoW.Two.Sdk.Backend.Beta.Data.Dapper` | `AddDapperConventions` (snake_case + DateOnly + ListTypeHandler), `IDbConnectionFactory`, `SqlNaming` (`Col`/`Par`/`Table`, string + expression overloads), `EnumTypeHandler<TEnum>` (reversible string enum, `AddEnumTypeHandler<T>`) | scaffold |
+| `WoW.Two.Sdk.Backend.Beta.Data.Dapper` | `AddDapperConventions` (snake_case + DateOnly + ListTypeHandler), `IDbConnectionFactory`, `SqlNaming` (`Col`/`Par`/`Table`, string + expression overloads), `EnumTypeHandler<TEnum>` (reversible string enum, `AddEnumTypeHandler<T>`); `DapperRepository<TEntity,TId>` (thin CRUD, SQL from `IHasTableName`+`SqlNaming`) + `AddDapperRepository` DI helpers | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.Migrations.Ef` | `AddEfMigrationsRunner<TContext>` — hosted service with connect-retry | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Data.Migrations.DbUp` | `AddDbUpRunner` — hosted service + provider factories (Postgres/SqlServer/MySql/Sqlite) | scaffold |
 

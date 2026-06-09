@@ -18,7 +18,13 @@ Decisions taken: **hand-rolled** casing engine (no Humanizer dep) · **string** 
 
 **Known convention call:** digit boundaries split (`TotalAreaCm2` → `total_area_cm_2`). Correct tokenization, but differs from Haven's `total_area_cm2`. If a "glue trailing digits to prior token" mode is wanted, add a tokenizer option later. Not blocking.
 
-**Still open from below:** reflection `MapEnums(assembly, style)` for Npgsql double-registry (3d); table-name *convention* default (chose explicit-only for now); JSON preset consolidation already covered by existing `JsonValueConverter<T>`.
+## ✅ Implemented (round 2 · session continuation)
+
+- **`Data.Dapper.Repositories.DapperRepository<TEntity,TId>`** — thin CRUD on the hot path, SQL generated from `IHasTableName` + `SqlNaming` + reflected properties. Same `IRepository`/`IReadRepository` contracts as the EF repo (interchangeable). `ExcludedOnInsert`/`ExcludedOnUpdate` hooks for identity/computed columns. DI helpers call `AddDapperConventions()` so snake→Pascal mapping is guaranteed. Validated against real SQLite (CRUD round-trip).
+- **`Data.EntityFrameworkCore.Postgres.MapEnums(style, nsFilter, pgTypeName, …assemblies)`** (gap 3d ✅) — reflection bulk enum registration on `NpgsqlDataSourceBuilder`, kills Haven's double-registry. Type + member names via the casing engine through `CaseStyleNameTranslator` (one casing authority). Validated (discovery + filter + translation).
+- **Thin EF repos** (`EfRepository`, `AddEfRepositories`) + **`Create/Update/Delete/Get` vocabulary** (ecosystem rule in `naming.md`); **Ardalis.Specification removed** (can't lower to Dapper).
+
+**Still open:** table-name *convention* default (chose explicit `IHasTableName`-only for now); Dapper repo write-path on SQLite-with-Guid keys needs a Guid type handler (Postgres native uuid is fine); JSON preset consolidation already covered by existing `JsonValueConverter<T>`.
 
 ---
 
