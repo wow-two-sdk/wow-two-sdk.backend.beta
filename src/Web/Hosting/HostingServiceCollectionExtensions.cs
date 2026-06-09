@@ -20,7 +20,7 @@ public static class HostingServiceCollectionExtensions
         services.Configure<ForwardedHeadersOptions>(o =>
         {
             o.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedHost;
-            o.KnownNetworks.Clear();
+            o.KnownIPNetworks.Clear();
             o.KnownProxies.Clear();
         });
 
