@@ -17,6 +17,7 @@ on:
 
 permissions:
   contents: write          # commit the version bump back to main
+  id-token: write          # mint the OIDC token for NuGet Trusted Publishing
 
 concurrency:
   group: publish
@@ -55,8 +56,14 @@ jobs:
       - name: Pack         # version comes from Directory.Build.props (just bumped)
         run: dotnet pack src/WoW.Two.Sdk.Backend.Beta.csproj -c Release -p:ContinuousIntegrationBuild=true -o artifacts
 
+      - name: Authenticate to NuGet (Trusted Publishing)   # OIDC → short-lived API key, no stored secret
+        uses: NuGet/login@v1
+        id: nuget-login
+        with:
+          user: MaxDev   # nuget.org username — VERIFY input name/value against the TP "Learn more" docs
+
       - name: Push to nuget.org   # the adjacent .snupkg is pushed automatically
-        run: dotnet nuget push "artifacts/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+        run: dotnet nuget push "artifacts/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ steps.nuget-login.outputs.NUGET_API_KEY }} --skip-duplicate
 
       - name: Commit + tag the bump
         run: |

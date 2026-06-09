@@ -135,8 +135,9 @@
 | Package | Niche | Status |
 |---|---|---|
 | `WoW.Two.Sdk.Backend.Beta.Http` | Meta — Refit + resilience defaults | planned |
-| `WoW.Two.Sdk.Backend.Beta.Http.Refit` | Refit registration extensions | planned |
-| `WoW.Two.Sdk.Backend.Beta.Http.Resilience` | `Microsoft.Extensions.Http.Resilience` defaults | planned |
+| `WoW.Two.Sdk.Backend.Beta.Http.Refit` | `AddRefitApiClient<TApi>(baseAddr, …)` — Refit client + SDK JSON + resilience baked in; `CreateDefaultRefitSettings()` | scaffold |
+| `WoW.Two.Sdk.Backend.Beta.Http.Resilience` | `AddSdkResilience()` (`IHttpClientBuilder` ext) + tunable `HttpResilienceOptions` over `Microsoft.Extensions.Http.Resilience` (Polly v8) | scaffold |
+| `WoW.Two.Sdk.Backend.Beta.Http.Core` | `AddResilientClient<TClient>` / `AddResilientClient(name, …)` — plain typed/named HttpClient + SDK resilience | scaffold |
 | `WoW.Two.Sdk.Backend.Beta.Http.Hedging` | Standard-Hedging handler preset | planned |
 | `WoW.Two.Sdk.Backend.Beta.Http.HeaderPropagation` | Forward headers to outbound HttpClient | planned |
 | `WoW.Two.Sdk.Backend.Beta.Http.Auth.OAuth2ClientCredentials` | Token-aware HttpClient handler | planned |

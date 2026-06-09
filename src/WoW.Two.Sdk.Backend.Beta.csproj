@@ -77,6 +77,13 @@
     <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" />
   </ItemGroup>
 
+  <ItemGroup Label="Http / outbound — Refit + Polly v8 resilience">
+    <PackageReference Include="Microsoft.Extensions.Http" />
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" />
+    <PackageReference Include="Refit" />
+    <PackageReference Include="Refit.HttpClientFactory" />
+  </ItemGroup>
+
   <ItemGroup Label="Identity / auth">
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
